@@ -1438,14 +1438,46 @@ $(document).ready(function() {
 		$(this).children(".duigou").show().prev().show().parent().siblings().children(".duigou").hide().prev().hide();
 	});
 
-	$("#tjxg").click(function(){
 		var zsf=1000;
-		var csypf;
-		var bxf;
-		
-		var sfxgcsyp= $('input:radio[name="xgcsyp"]:checked').val();
-		var sfxgbx= $('input:radio[name="xgbx"]:checked').val();
-		console.log(sfxgcsyp+sfxgbx);
+		var csypf=0;
+		var bxf=0;
+		var zjje;
+		var sfxgcsyp;
+		var sfxgbx;
+	$(document).ready(function(){
+		sfxgcsyp= $('input:radio[name="xgcsyp"]:checked').val();
+		sfxgbx= $('input:radio[name="xgbx"]:checked').val();
+		$("#bxgcsyp").click(function(){
+			sfxgcsyp="N";
+			csypf=0;
+			console.log(csypf);
+			zjje=zsf+csypf+bxf;
+			$(".querenxinxi span").text(zjje);
+		});
+		$("#xgcsyp").click(function(){
+			sfxgcsyp="Y";
+			csypf=200;
+			console.log(csypf);
+			zjje=zsf+csypf+bxf;
+			$(".querenxinxi span").text(zjje);
+		});
+		$("#bxgbx").click(function(){
+			sfxgbx="N"
+			bxf=0;
+			console.log(bxf);
+			zjje=zsf+csypf+bxf;
+			$(".querenxinxi span").text(zjje);
+		});
+		$("#xgbx").click(function(){
+			sfxgbx="Y";
+			bxf=500;
+			console.log(bxf);
+			zjje=zsf+csypf+bxf;
+			$(".querenxinxi span").text(zjje);
+		});
+	});
+	$("#tjxg").click(function(){
+		console.log(zsf+csypf+bxf);
 		
 	});
 
