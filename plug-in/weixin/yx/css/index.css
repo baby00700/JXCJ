@@ -1,0 +1,306 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body{ background:#ecedf1; font-family:"微软雅黑";}
+html{ _background:url(about:blank);}
+/*学生信息样式 后加 开始*/
+.stuinfo{
+	width:100%;
+	height: 241px;
+	background-color:#fff;
+	position:relative;
+	
+}
+.jibenxinxi{
+	width:100%;
+	height: 130px;
+	position:absolute;
+	top:0px;
+	overflow: hidden;
+	
+}
+
+.touxiang{
+	height:70px;
+	width:70px;
+	border:2px solid #1296DB;
+	border-radius:40px;
+	position:absolute;
+	top: 26px;
+	left:15px;
+	background-image: url(../images/head.png);
+	background-size: 100% 100%;
+}
+.loginout{
+	width:70px;
+	height:15px;
+	position:absolute;
+	top:103px;
+	left:15px;
+	background-color:#1296DB;
+	font-size:9pt;
+	line-height:16px;
+	text-align: center;
+	color:#fff;
+	border-radius:8px;
+	
+}
+
+
+.wenzi{
+	width:80%;
+	height:95px;
+	margin-top:3px;
+	position:absolute;
+	left:100px;
+	top:26px;
+	
+	
+
+
+}
+
+
+.zt{
+	width:100%;
+	height:20px;
+	font-size: 12pt;
+	
+	position: relative;
+   
+    line-height:20px;
+
+}
+
+.zhuangtaicon{
+	width:4em;
+	height:21px;
+	position:absolute;
+	top:0px;
+	left:5em;
+
+
+
+
+}
+
+.shuaxinmain{
+
+	width:19px;
+	height:19px;
+	background-image: url("../images/shuaxin.png");
+	background-size: 100% 100% ;
+	position:absolute;
+	top:0px;
+	left:9em;
+	border-radius:10px;
+	
+
+
+
+}
+
+@-webkit-keyframes shuaxinrotate0
+{
+    from {-webkit-transform:rotate(0deg); }
+    to {-webkit-transform:rotate(180deg); }
+}
+
+@-webkit-keyframes shuaxinrotate1
+{
+    from {-webkit-transform:rotate(180deg); }
+    to {-webkit-transform:rotate(360deg); }
+}
+
+
+.xuanzhuan0{
+    -webkit-animation:shuaxinrotate0 0.8s;
+}
+
+.xuanzhuan1{
+    -webkit-animation:shuaxinrotate1 0.8s;
+}
+
+
+
+
+.xingming,.luquxibu,.luquzhuanye{
+	width:100%;
+	height:24px;
+	
+	}
+#laizi{
+	width:100%;
+	background-color:#1296DB ;
+	color:#fff;
+	border-radius: 11px;
+	font-size:10pt;
+	padding-right:5px ;
+	padding-left:5px ;
+	margin-left:2px;
+	margin-bottom:2px;
+	position:relative;
+	top:-2px;
+}
+
+#diqu
+{
+    height:10px;
+	overflow:hidden;
+	width:3em;
+	font-size:9pt;
+	text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	white-space: nowrap;/*强制不换行*/
+	line-height:8px;
+	
+
+}
+
+
+
+
+
+.shuju{
+	width:100%;
+	height:20px;
+	font-size: 12pt;
+	color:#1296DB;
+	position: relative;
+}
+
+#luqubuxi{
+	overflow: hidden; /*自动隐藏文字*/
+	text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	white-space: nowrap;/*强制不换行*/
+	width:6em;/*不允许出现半汉字截断*/
+	position: absolute;
+	left:5em;
+}
+
+
+
+
+#summary{
+	overflow: hidden; /*自动隐藏文字*/
+	text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	white-space: nowrap;/*强制不换行*/
+	width:8em;/*不允许出现半汉字截断*/
+
+
+	
+}
+#luquzhuanye{
+
+	 overflow: hidden; /*自动隐藏文字*/
+	 text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	 white-space: nowrap;/*强制不换行*/
+	 width:6em;/*不允许出现半汉字截断*/
+	 position: absolute;
+	 left:5em;
+ }
+
+
+.xiaoyouxinxi{
+	width:100%;
+	height:100px;
+	background-color:#fff;
+	position:absolute;
+	bottom:0px;
+}
+.xiaoyouxinxilan,.daohanglan,.zixunlan{
+	width:100%;
+	height:44px;
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+}
+.tubiao{
+	width:30px;
+	height:30px;
+	
+	background-size:100% 100%;
+	float: left;
+	margin-left:15px;
+	margin-top:7px;
+}
+.xiaoyouxinxilan .tubiao{
+	background-image:url(../images/tou.png);
+}
+.daohanglan .tubiao{
+	background-image:url(../images/daohang.png);
+}
+.zixunlan .tubiao{
+	background-image:url(../images/zixun.png);
+}
+
+
+
+.wenzibiaoti{
+	width:100%;
+	height:30px;
+	line-height: 30px;
+	margin-top:8px;
+	font-size: 13pt;
+}
+
+.xiaoyouxiangqing{
+	width:100%;
+	height:65px;
+	border-bottom:1px solid #eee;
+	text-align: center;
+	font-size:10pt;
+}
+.xiangqingshu{
+	width:33%;
+	height:65px;
+	color:#666;
+	float:left;
+}
+
+.tongsushe-s,.tongbanji-s,.tongzhuanye-s{
+	width:100%;
+	height:30px;
+	margin-top:2px;
+	line-height: 30px;
+	font-size: 13pt;
+	
+}
+.tongsushe-z,.tongbanji-z,.tongzhuanye-z{
+	width:100%;
+	height:20px;
+	line-height: 20px;
+}
+
+
+/*学生信息样式 结束*/
+.view{ width:100%; height:auto; background:#fff; margin-bottom:15px; overflow:hidden; padding-bottom:15px;margin-top:15px;}
+.view ul{ margin:0px 15px;}
+.view li{ float:left; width:25%; text-align:center; padding-top:15px; line-height:24px; font-size:11pt;}
+.view a{ display:block;}
+.view img{ width:48px; height:48px;}
+
+.news{ width:100%; height:auto; background:#fff; overflow:hidden;}
+.news_nav{ height:24px; padding:12px 15px;}
+.news_nav img{ width:24px; height:24px;}
+.news_nav span,.news_nav{ float:left; font-size:13pt}
+.news_nav strong{ color:#333; line-height:24px; font-size:13pt; padding-left:10px;}
+
+.news_img{ height:160px; padding:0px 15px;}
+.news_img a{ display:block;}
+.tp{ position:relative; width:100%; height:160px; display:block; text-align:center;}
+.tp img{ width:100%;}
+.tp span{ width:100%; position:absolute; background:#333;background:rgba(0,0,0,0.5); color:#fff; bottom:0px; left:0px; padding:8px 0px; font-size:12pt;}
+
+#list{ width:100%; height:auto; background:#fff; overflow:hidden; }
+.list{ padding:0px 15px; border-bottom:1px solid #e5e5e5;}
+.list a{ display:block;}
+.box{ height:72px; padding:15px 0px; font-size:10pt;}
+.left{ float:left; width:96px; height:72px;}
+.right{ width:auto; height:72px; margin:0px 0px 0px 106px;}
+.left img{ width:96px; height:72px;}
+.right h1{ height:18px;line-height:18px; font-size:11pt; color:#555;}
+.right p{ line-height:18px;}
+.right p font{ color:#6c6c6c;}
+.right p strong{ float:left; color:#0db8f6; background:url(../images/tibiao.png) no-repeat 0px center; background-size:16px 14px; padding-left:20px;}
+.right p span{ float:right; color:#8d8d8d;}
+.more{ width:100%; height:40px; border-bottom:1px solid #e5e5e5; line-height:40px; text-align:center;}
+.more a,.more a:hover{ display:block; color:#555; font-size:10pt;}
+

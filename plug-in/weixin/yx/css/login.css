@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:url(../images/bodyBg.png) repeat-x; font-family:"微软雅黑";}
+input{ outline:none; font-family:"微软雅黑";-webkit-tap-highlight-color:rgba(255,0,0,0);}
+.header{ width:100%; height:102px; padding:15px 0px;}
+.img{ width:102px; height:102px; margin:0px auto;}
+.photo{ display:block; width:96px; height:96px; border-radius:96px; border:3px solid #fff; overflow:hidden;}
+.photo img{ width:100%;}
+
+.login{ width:100%; height:100px; background:#fff; border-top:1px solid #e2e3e5;}
+.user{ width:100%; height:50px; background:#fff; border-bottom:1px solid #e2e3e5;}
+.userName{ height:50px; margin:0px 10px; padding-left:28px; background:url(../images/tb1.gif) no-repeat 0px center;}
+.userPwd{ height:50px; margin:0px 10px; padding-left:28px; background:url(../images/tb2.gif) no-repeat 0px center;}
+.inp{ width:100%; height:26px; padding:12px 0px;}
+.txt{ width:100%; height:26px; border:0px; background:#fff; line-height:26px; font-size:16px;}
+.box{ margin:15px;}
+.btn{ width:100%; height:50px; background:#00aced; border-radius:5px;}
+.sub{ width:100%; height:50px; border:0px; background:none; font-size:20px; color:#fff;}
+.link{ width:100%; height:30px; padding-top:10px;}
+.link span.one{ float:left;}
+.link span.two{ float:right;}
+.link a,.link a:hover{ color:#00aced; font-size:16px; text-decoration:none;}

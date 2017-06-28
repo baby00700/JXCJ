@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+*{ padding:0px; margin:0px;}
+body{ font-size:11pt; background:#efeff4;}
+li{ list-style:none;}
+img{ border:0px;}
+a{ color:#000; text-decoration:none;}
+a:hover{ color:#000; text-decoration:underline;}
+a,li{ -webkit-tap-highlight-color:rgba(255,0,0,0);} 
+
+.header{ padding:0px 16px; height:48px; line-height:48px; background:#fff;}
+.header h1{ font-size:13pt; color:#333;}
+.header span{ float:right; display:block; width:24px; height:24px; padding:12px 0px;}
+.header a{ display:block; width:24px; height:24px; background:url(../images/refresh.png) no-repeat center; background-size:24px;}
+.nav{ margin:16px 0px; padding:16px 8px 0px 8px; height:auto; overflow:hidden; font-family:"Microsoft YaHei"; background:#fff;}
+.nav li{ float:left; width:50%; height:90px; padding-bottom:16px; text-align:right;}
+.nav span{ display:block; height:60px; border-radius:4px; margin:0px 8px; color:#fff; padding:15px 0px;}
+.nav h1{ font-size:18pt; line-height:30px; padding-right:15px;}
+.nav p{ font-size:11pt; line-height:30px; padding-right:15px; font-weight:bold;}
+.sign{ background:#3598dc url(../images/signBg.png) no-repeat 10px bottom; background-size:48px;}
+.num1{ background:#e7505a url(../images/num1Bg.png) no-repeat 10px bottom; background-size:48px;}
+.num2{ background:#32c5d2 url(../images/num2Bg.png) no-repeat 10px bottom; background-size:48px;}
+.num3{ background:#8e44ad url(../images/num3Bg.png) no-repeat 15px bottom; background-size:36px;}
+
+.sign:hover{ background:#2d8dce url(../images/signBg.png) no-repeat 10px bottom; background-size:48px;}
+.num1:hover{ background:#da4751 url(../images/num1Bg.png) no-repeat 10px bottom; background-size:48px;}
+.num2:hover{ background:#2ab8c5 url(../images/num2Bg.png) no-repeat 10px bottom; background-size:48px;}
+.num3:hover{ background:#833ba1 url(../images/num3Bg.png) no-repeat 15px bottom; background-size:36px;}
+
+.main{ padding:16px; background:#fff;}
+.tabs{ border-collapse:collapse; border:1px solid #81d4fe; color:#555; table-layout:fixed;}
+.tabs th{ border-bottom:1px solid #81d4fe; line-height:24px; text-align:center; padding:8px; word-wrap:break-word;}
+.tabs td{ border-bottom:1px solid #81d4fe; line-height:24px; text-align:center; padding:8px; word-wrap:break-word;}
