@@ -6,7 +6,6 @@
 input{
 	margin-bottom: 0px;
 }
-
 .wrap {
 	width: 100%;
 }
@@ -367,13 +366,6 @@ li {
 	
 }
 
-.inputtext{
-  display: none;
-  margin-left:10px;
-  font-size:11pt;
-  line-height: 45px;
-}
-
 .youxiang{
 
 	display: none;
@@ -468,6 +460,49 @@ li {
 
 
 
+.bigTouxiang{
+	
+	width:100%;
+	height:0px;
+	background-color:#fff;
+	z-index:-222;
+	display:none;
+	-webkit-box-shadow:0px -1px 6px 1px #eee inset;
+	
+}
+
+
+.yicun{
+	width:130px;
+	height:180px;
+	background-image: url(../images/yicun.png);
+	background-size: 100% 100%;
+	border-radius:10px;
+	-webkit-box-shadow:1px 1px 4px 1px rgba(0,0,0,0.2);
+	margin:0 auto;
+	margin-top:10px;
+	z-index:111;
+	position: relative;
+
+}
+.upicon{
+	height:20px;
+	width:20px;
+	-webkit-box-shadow: 0px 0px 2px 1px #bbb;
+	background-image:url(../images/close.png);
+	background-size:100% 100%;
+	position: absolute;
+	top:60px;
+	right:-20px;
+	z-index:555;
+
+	border-radius:10px;
+	background-size:100% 100%;
+	color:#fff;
+	text-align: center;
+	line-height: 20px;
+
+}
 .gerenxinxi-biaoti{
 	width: 100%;
 	height: 50px;
@@ -500,17 +535,18 @@ li {
 }
 
 .geren-touxiang{
-	width:35px;
-	height:35px;
+	width:30px;
+	height:37px;
+	position:relative;
+	left:-15px;
 }
 .geren-touxiang img{
-	width:35px;
+	width:26px;
 	height:35px;
-	border-radius:17px;
+	border-radius:3px;
 	margin-top:5px;
-	
-}
 
+}
 
 
 .lvsetongdao{
@@ -548,6 +584,40 @@ li {
 	left: 55px;
 	font-size: 12pt;
 }
+
+.zhusufei-biaoti{
+	width: 100%;
+	height: 50px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	position: relative;
+	margin-top:15px;
+	background-color:#fff;
+}
+
+.zhusufei-tubiao{
+	width: 36px;
+	height: 36px;
+	border: 1px solid #eee;
+	position: absolute;
+	left: 10px;
+	top: 7px;
+	border-radius: 18px;
+	background-image:url(../images/zhusufei.png);
+	-webkit-background-size: 100% 100%;
+	background-size:100% 100%;
+}
+
+.zhusufei-wenzi{
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+	top: 6px;
+	left: 55px;
+	font-size: 12pt;
+}
+
+
 .shifou-daikuan{
 	width:100%;
 	height:52px;
@@ -764,6 +834,46 @@ li {
 	color:#ccc;
 }
 
+/*是否选购床上用品*/
+.sfxuangouyp{
+	width:100%;
+	height:45px;
+	background-color:#fff;
+	line-height:45px;
+	position:relative;
+	border-bottom: 1px solid #eee;
+}
+.sfxuangouyp p{ 
+	width:110px;
+	height:40px;
+	background-color:#fff;
+	line-height:45px;
+	margin-left:15px;
+	color:#000;
+	font-size:11pt;
+}
+.csypjg{
+	width:60px;
+	height:40px;
+	position: absolute;
+	right:50px;
+	top:3px;
+	line-height:45px;
+	color:red;
+	font-size:14px;
+	text-align: right;
+}
+.duigou{
+	width:25px;
+	height:25px;
+	position: absolute;
+	right:15px;
+	top:13px;
+	background-image:url(../images/gou.png);
+	background-size:100% 100%;
+}
+
+/*是否选购床上用品end*/
 .shenhe-zhuangtai{
 	
 	height:20px;
@@ -828,12 +938,76 @@ li {
 	left: 55px;
 	font-size: 12pt;
 }
+.xuangouyp-biaoti{
+	width: 100%;
+	height: 50px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	position: relative;
+	margin-top:15px;
+	background-color:#fff;
+}
+.xuangouyp-tubiao{
+	width: 36px;
+	height: 36px;
+	border: 1px solid #eee;
+	position: absolute;
+	left: 10px;
+	top: 7px;
+	border-radius: 18px;
+	background-image:url(../images/chuangshang.png);
+	-webkit-background-size: 100% 100%;
+	background-size:100% 100%;
+}
+
+.xuangouyp-wenzi{
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+	top: 6px;
+	left: 55px;
+	font-size: 12pt;
+}
+
+
+.xuangoubx-biaoti{
+	width: 100%;
+	height: 50px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	position: relative;
+	margin-top:15px;
+	background-color:#fff;
+}
+.xuangoubx-tubiao{
+	width: 36px;
+	height: 36px;
+	border: 1px solid #eee;
+	position: absolute;
+	left: 10px;
+	top: 7px;
+	border-radius: 18px;
+	background-image:url(../images/baoxian.png);
+	-webkit-background-size: 100% 100%;
+	background-size:100% 100%;
+}
+
+.xuangoubx-wenzi{
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+	top: 6px;
+	left: 55px;
+	font-size: 12pt;
+}
+
+
 
 .querenxinxi{
 	width:100%;
 	height:20px;
-	font-size: 11pt;
-	color:#0C94DA;
+	font-size: 10pt;
+	color:#777;
 	text-align: center;
 	line-height: 20px;
 	margin-top:10px;
@@ -1687,52 +1861,4 @@ li {
 	float: right;
 	margin-right:10px;
 	font-size:11pt;
-}
-/*辅导员管理页面*/
-
-.fdyinfo{
-	width:100%;
-	height:auto;
-}
-.fdytitle{
-	height:40px;
-	width:100%;
-	border-bottom: 1px solid #eee;
-	line-height:40px;
-}
-
-.fdyright{
-	float: right;
-}
-.fdyowner{
-	height:40px;
-	width:100%;
-	border-bottom: 1px solid #eee;
-	line-height:40px;
-	text-align: center;
-}
-
-.fdyowner-con{
-	width:100%;
-	border-bottom: 1px solid #eee;
-	line-height:40px;
-	text-align: center;
-}
-
-.fdyowner-con li{
-	text-align: center;
-	
-}
-
-.fdyloginout{
-	height:30px;
-	background-color:#1296DB;
-	margin-left: 25%;
-	margin-right: 25%;
-	margin-top:10px;
-	
-	border-radius:8px;
-	line-height: 30px;
-	text-align: center;
-	color:#fff;
 }
