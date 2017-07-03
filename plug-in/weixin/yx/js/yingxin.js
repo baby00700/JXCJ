@@ -1,21 +1,4 @@
-//时间判断时间段内
-var isTimeIn;
-
-function isTime() {
-	var beginDate = new Date(kssj);
-	var endDate = new Date(jssj);
-	var date = new Date();
-	var nowStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-	var nowDate = new Date(nowStr);
-	if(beginDate < nowDate && nowDate < endDate) {
-		console.log("在范围内");
-		isTimeIn = true;
-	} else {
-		console.log("不在范围内");
-		isTimeIn = false;
-	}
-
-}
+//onload
 
 $(document).ready(function() {
 
@@ -50,7 +33,7 @@ $(document).ready(function() {
 						var oron = obj[i].endbs;
 						console.log(oron);
 						if(oron == "on") {
-							$("#page4").show().siblings().hide();
+							$("#page6").show().siblings().hide();
 
 						}
 					}
@@ -60,7 +43,7 @@ $(document).ready(function() {
 				}
 
 			}
-			benciliucheng = liucheng = 3; //流程控制
+			benciliucheng = liucheng; //流程控制
 			//默认状态	默认头部本步骤高亮 默认所获取的状态之前的页面不可见 默认显示本次流程状态页面
 			//将按钮样式变化以及切换div封装为函数//初始状态下按钮
 			function buttonclick(buttn) {
@@ -103,10 +86,8 @@ $(document).ready(function() {
 				}
 
 			});
-
 			//点击底部按钮 提交数据 跳转下一页 并禁用事件
 			//page1
-
 			$("#gerenxinxibut").unbind("click").on("click", function() {
 
 				//判断必填项是否为空
@@ -158,8 +139,8 @@ $(document).ready(function() {
 					"mobile": mobile,
 					"syd": syd,
 					"jtdz": jtdz,
-					"mail": stmail
-				}, ];
+					//"mail": stmail
+				}];
 
 				var jtinfo = [{
 					"jtmc1": jtmc1,
@@ -176,10 +157,11 @@ $(document).ready(function() {
 					"xstz": xstz,
 					"fzcc": fzcc,
 					"xzcc": xzcc,
-					"jtrks": jtrksval,
-					"rjnsr": jtnsrval,
-					"gwbs": jtgwbsval,
-					"jtlx": jtlxval
+					"jtrks": 0,
+					"rjnsr": 0,
+					"gwbs": 0,
+					"jtlx": 0
+
 				}];
 
 				var otjt1;
@@ -229,125 +211,8 @@ $(document).ready(function() {
 								var bmsu = data.success;
 								var bmobj = data.msg;
 								if(bmsu == true) {
-
+									//显示加载
 									$(".jiazai").stop().fadeOut(1000);
-
-									//获取宿舍信息
-									var dropid = "";
-									var susheOBJmc;
-									var susheOBJid;
-									$("#qinshi00").css("width", "0");
-
-									$("#qinshijiazai").show();
-									$.ajax({
-										type: "post",
-										dataType: "json",
-										url: "mobileStudentController.do?getDromList",
-										data: {
-
-											pid: dropid
-										},
-										success: function(data) {
-											//	alert("jiazai");
-											//console.log(data);
-											var end = data.obj;
-											console.log(data.msg);
-											var obj = $.parseJSON(data.msg);
-
-											if(obj.length != 0) { //判断是否有床位
-												if(end != null && end == "end") { //判断是否为END
-													//	alert(end);
-													for(var i = 0; i < obj.length; i++) {
-														alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-													}
-												} else {
-													for(var i = 0; i < obj.length; i++) {
-														//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-														susheOBJmc = obj[i].cname;
-														susheOBJid = obj[i].BS;
-														var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-														$("#qinshi00").append(susheSEL);
-														var selsize = $("#qinshi00 option").size();
-														if(selsize >= 2) {
-															console.log(selsize);
-															$("#qinshijiazai").hide();
-															$("#qinshi00").css("width", "auto");
-														}
-													}
-
-												}
-
-											} else {
-												//alert("无可用床位！");
-												$("#qinshijiazai").hide();
-												$("#qinshi00").css("width", "auto");
-												$("#qinshi00 option").remove();
-												$("#qinshi00").append('<option value="none">无</option>');
-												$("#chuangwei00 option").remove();
-												$("#chuangwei00").append('<option value="none">无</option>');
-											}
-
-										},
-										error: function(msg) {
-											//alert("error:" + msg);
-											alert("刷新频率过快！");
-										}
-									});
-									//select change事件 选宿舍 每一次change就给下面的option赋值
-									$("#qinshi00").change(function() {
-										$("#chuangwei00").css("width", "0");
-										$("#chuangweijiazai").show();
-										$("#chuangwei00 option").remove();
-										$("#chuangwei00").append('<option value="none">请选择</option>');
-										var val00 = $("#qinshi00").val();
-										if(val00 == "none") {
-											$("#chuangwei00").css("width", "auto");
-											$("#chuangweijiazai").hide();
-										}
-										dropid = val00;
-										$.ajax({
-											type: "post",
-											dataType: "json",
-											url: "mobileStudentController.do?getDromList",
-											data: {
-												sfzh: sfzh,
-												pid: dropid
-											},
-											success: function(data) {
-												var end = data.obj;
-
-												var obj = $.parseJSON(data.msg);
-												if(end != null && end == "end") {
-													//alert(end);
-													for(var i = 0; i < obj.length; i++) {
-														//alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-														susheOBJmc = obj[i].cname;
-														susheOBJid = obj[i].cc;
-														var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-														$("#chuangwei00").append(susheSEL);
-
-														var selsize = $("#chuangwei00 option").size();
-														if(selsize >= 2) {
-															console.log(selsize);
-															$("#chuangweijiazai").hide();
-															$("#chuangwei00").css("width", "auto");
-														}
-														susheOBJid = val00;
-													}
-												} else {
-													for(var i = 0; i < obj.length; i++) {
-														//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-
-													}
-
-												}
-											},
-											error: function(msg) {
-												//alert("error:" + msg);
-												alert("刷新频率过快！");
-											}
-										});
-									});
 
 									//跳转和样式 开始
 									$("#page1").stop().fadeOut();
@@ -359,7 +224,7 @@ $(document).ready(function() {
 									$(this).removeClass("subbut").addClass("subbut-visited");
 									benciliucheng++;
 									buttonclick(buttn);
-									$("#gerenxinxibut").unbind();
+									$("#gerenxinxibut").unbind().addClass("subbut-visited");;
 									//跳转和样式 结束
 								} else {
 									$(".jiazai").stop().fadeOut(1000);
@@ -371,9 +236,7 @@ $(document).ready(function() {
 									$("#baoming-fbbut").click(function() {
 										$("#fbbm-queren").stop().fadeOut();
 									});
-
 								}
-
 							},
 							/*success END*/
 							error: function() {
@@ -389,7 +252,6 @@ $(document).ready(function() {
 							}
 						});
 						//b报名方法end
-
 					} else {
 						alert("请至少填写完整一位家长或监护人的信息！");
 
@@ -398,410 +260,234 @@ $(document).ready(function() {
 
 			});
 
-			isTime();
-
-			if(sfdz == "Y") {
-				if(isTimeIn == false) { //如果单招学生不在时间内选宿舍
-					$("#qinshi00 option").remove();
-					$("#chuangwei00 option").remove();
-
-					$("#qinshi00").append('<option value="none">当前暂无可用宿舍</option>');
-
-					$("#chuangwei00").append('<option value="none">当前暂无可用宿舍</option>');
-				} else { //单招学生在时间内选宿舍
-					if(liucheng == 1) {
-						//获取宿舍信息
-						var dropid = "";
-						var susheOBJmc;
-						var susheOBJid;
-						$("#qinshi00").css("width", "0");
-						$("#qinshijiazai").show();
-						$.ajax({
-							type: "post",
-							dataType: "json",
-							url: "mobileStudentController.do?getDromList",
-							data: {
-
-								pid: dropid
-							},
-							success: function(data) {
-								//	alert("jiazai");
-								//console.log(data);
-								var end = data.obj;
-								console.log(data.msg);
-								var obj = $.parseJSON(data.msg);
-
-								if(obj.length != 0) { //判断是否有床位
-									if(end != null && end == "end") { //判断是否为END
-										//	alert(end);
-										for(var i = 0; i < obj.length; i++) {
-											alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-										}
-									} else {
-										for(var i = 0; i < obj.length; i++) {
-											//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-											susheOBJmc = obj[i].cname;
-											susheOBJid = obj[i].BS;
-											var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-											$("#qinshi00").append(susheSEL);
-											var selsize = $("#qinshi00 option").size();
-											if(selsize >= 2) {
-												console.log(selsize);
-												$("#qinshijiazai").hide();
-												$("#qinshi00").css("width", "auto");
-											}
-										}
-
-									}
-
-								} else {
-									//alert("无可用床位！");
-									$("#qinshijiazai").hide();
-									$("#qinshi00").css("width", "auto");
-									$("#qinshi00 option").remove();
-									$("#qinshi00").append('<option value="none">无</option>');
-									$("#chuangwei00 option").remove();
-									$("#chuangwei00").append('<option value="none">无</option>');
-								}
-
-							},
-							error: function(msg) {
-								//alert("error:" + msg);
-								alert("刷新频率过快！");
-							}
-						});
-
-						//select change事件 选宿舍 每一次change就给下面的option赋值
-						$("#qinshi00").change(function() {
-							$("#chuangwei00").css("width", "0");
-							$("#chuangweijiazai").show();
-							$("#chuangwei00 option").remove();
-							$("#chuangwei00").append('<option value="none">请选择</option>');
-							var val00 = $("#qinshi00").val();
-							if(val00 == "none") {
-								$("#chuangwei00").css("width", "auto");
-								$("#chuangweijiazai").hide();
-							}
-							dropid = val00;
-							$.ajax({
-								type: "post",
-								dataType: "json",
-								url: "mobileStudentController.do?getDromList",
-								data: {
-									sfzh: sfzh,
-									pid: dropid
-								},
-								success: function(data) {
-									var end = data.obj;
-
-									var obj = $.parseJSON(data.msg);
-									if(end != null && end == "end") {
-										//alert(end);
-										for(var i = 0; i < obj.length; i++) {
-											//alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-											susheOBJmc = obj[i].cname;
-											susheOBJid = obj[i].cc;
-											var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-											$("#chuangwei00").append(susheSEL);
-
-											var selsize = $("#chuangwei00 option").size();
-											if(selsize >= 2) {
-												console.log(selsize);
-												$("#chuangweijiazai").hide();
-												$("#chuangwei00").css("width", "auto");
-											}
-											susheOBJid = val00;
-										}
-									} else {
-										for(var i = 0; i < obj.length; i++) {
-											//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-
-										}
-
-									}
-								},
-								error: function(msg) {
-									//alert("error:" + msg);
-									alert("刷新频率过快！");
-								}
-							});
-						});
-
-					}
-				}
-
-			} else { //非单招学生正常流程选宿舍
-				if(liucheng == 1) {
-					//获取宿舍信息
-					var dropid = "";
-					var susheOBJmc;
-					var susheOBJid;
-					$("#qinshi00").css("width", "0");
-					$("#qinshijiazai").show();
+			//page2缴费
+			$("#xuefeizhifubut").click(function() {
+				//显示遮罩层
+				$(".zhezhao-queren").stop().fadeIn();
+				$("#main-quxiao").show();
+				$("#main-querenbut").show();
+				$("#main-quxiao").click(function() {
+					$(".zhezhao-queren").stop().fadeOut();
+				});
+				$(".queren-wenzi p").text("请点击确定按钮进行支付！").css("margin-top", "20px").css("padding-left", "10px");
+				$("#main-querenbut").click(function() {
+					//显示加载动画
+					$('.jiazai').stop().fadeIn();
+					//ajax...
+					//学费缴费
 					$.ajax({
 						type: "post",
 						dataType: "json",
-						url: "mobileStudentController.do?getDromList",
-						data: {
-
-							pid: dropid
-						},
+						url: "mobileStudentController.do?doSaveJF",
+						async: true,
 						success: function(data) {
-							//	alert("jiazai");
-							//console.log(data);
-							var end = data.obj;
-							console.log(data.msg);
-							var obj = $.parseJSON(data.msg);
+							if(data.success == true) {
 
-							if(obj.length != 0) { //判断是否有床位
-								if(end != null && end == "end") { //判断是否为END
-									//	alert(end);
-									for(var i = 0; i < obj.length; i++) {
-										alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-									}
-								} else {
-									for(var i = 0; i < obj.length; i++) {
-										//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-										susheOBJmc = obj[i].cname;
-										susheOBJid = obj[i].BS;
-										var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-										$("#qinshi00").append(susheSEL);
-										var selsize = $("#qinshi00 option").size();
-										if(selsize >= 2) {
-											console.log(selsize);
-											$("#qinshijiazai").hide();
-											$("#qinshi00").css("width", "auto");
+								//跳转和样式 开始
+								$("#page2").stop().fadeOut();
+								$("#page3").stop().fadeIn();
+								$(".jiazai").stop().fadeOut(1000);
+								n = 2;
+								isn1 = n;
+								gaoliangtop(n);
+								$(this).removeClass("subbut").addClass("subbut-visited");
+								benciliucheng++;
+								buttonclick(buttn);
+								$("#xuefeizhifubut").unbind().addClass("subbut-visited");;
+								//跳转和样式 结束
+
+								//获取宿舍信息
+								$.ajax({
+									type: "post",
+									dataType: "json",
+									url: "mobileStudentController.do?generatingDrom",
+									async: true,
+									success: function(data) {
+
+										console.log(data);
+										if(data.success == true) {
+											console.log(typeof data.msg);
+											var sshparse = JSON.parse(data.msg);
+											console.log(sshparse[0].ssh);
+											var sshOrign = sshparse[0].ssh;
+											var ssharr = sshOrign.split("-");
+											console.log(ssharr);
+											var ssh = ssharr[0] + "-" + ssharr[1] + "-" + ssharr[2] + "-" + ssharr[3];
+											console.log(ssh);
+											$("#ssh").text(ssh);
+											$("#ssh0").text(ssh);
+											//关闭遮罩层
+											$(".zhezhao-queren").stop().fadeOut();
+											//关闭加载动画】
+											$('.jiazai').stop().fadeOut();
+										} else {
+											//关闭遮罩层
+											$(".zhezhao-queren").stop().fadeOut();
+											//关闭加载动画】
+											$('.jiazai').stop().fadeOut();
+											//打开遮罩层 提示失败
+											$(".zhezhao-queren").stop().fadeIn();
+											$("#querenbut-main").show();
+											$("#main-quxiao").hide();
+											$("#main-querenbut").hide();
+											$("#querenbut-main").click(function() {
+												$(".zhezhao-queren").stop().fadeOut();
+											});
+											$(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
+											//填充msg
+											$("#ssh").text(data.msg);
+											//下一页按钮灰色
+											$("#xuansushe").hide().next().show();
 										}
+									},
+									error: function(data) {
+										console.log(data);
 									}
 
-								}
+								});
+								//获取宿舍信息end
 
 							} else {
-								//alert("无可用床位！");
-								$("#qinshijiazai").hide();
-								$("#qinshi00").css("width", "auto");
-								$("#qinshi00 option").remove();
-								$("#qinshi00").append('<option value="none">无</option>');
-								$("#chuangwei00 option").remove();
-								$("#chuangwei00").append('<option value="none">无</option>');
+								alert(data.msg);
 							}
-
 						},
-						error: function(msg) {
-							//alert("error:" + msg);
-							alert("刷新频率过快！");
+						error: function() {
+							alert(data.msg);
 						}
 					});
-					//select change事件 选宿舍 每一次change就给下面的option赋值
-					$("#qinshi00").change(function() {
-						$("#chuangwei00").css("width", "0");
-						$("#chuangweijiazai").show();
-						$("#chuangwei00 option").remove();
-						$("#chuangwei00").append('<option value="none">请选择</option>');
-						var val00 = $("#qinshi00").val();
-						if(val00 == "none") {
-							$("#chuangwei00").css("width", "auto");
-							$("#chuangweijiazai").hide();
-						}
-						dropid = val00;
-						$.ajax({
-							type: "post",
-							dataType: "json",
-							url: "mobileStudentController.do?getDromList",
-							data: {
-								sfzh: sfzh,
-								pid: dropid
-							},
-							success: function(data) {
-								var end = data.obj;
 
-								var obj = $.parseJSON(data.msg);
-								if(end != null && end == "end") {
-									//alert(end);
-									for(var i = 0; i < obj.length; i++) {
-										//alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-										susheOBJmc = obj[i].cname;
-										susheOBJid = obj[i].cc;
-										var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-										$("#chuangwei00").append(susheSEL);
-
-										var selsize = $("#chuangwei00 option").size();
-										if(selsize >= 2) {
-											console.log(selsize);
-											$("#chuangweijiazai").hide();
-											$("#chuangwei00").css("width", "auto");
-										}
-										susheOBJid = val00;
-									}
-								} else {
-									for(var i = 0; i < obj.length; i++) {
-										//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-
-									}
-
-								}
-							},
-							error: function(msg) {
-								//alert("error:" + msg);
-								alert("刷新频率过快！");
-							}
-						});
-					});
-
-				}
-			}
-
-			//page5
-
-			//是否确认分配宿舍并验证是否为空 并跳转下一步
-			$("#xuansushe").click(function() {
-
-				var qinshi00 = $("#qinshi00").val();
-				var chuangwei00 = $("#chuangwei00").val();
-				var chuangwei01 = $("#chuangwei00").find("option:selected").text();
-
-				var qxz = "none";
-				console.log(qinshi00 + chuangwei00);
-				if(qinshi00 != qxz && chuangwei00 != qxz) {
-					$("#sushe-quxiao").show();
-					$("#sushe-querenbut").show();
-					$("#querenbut-sushe1").hide();
-					$("#sushe-querenzz").stop().fadeIn();
-					$("#sushe-queren-z p").text("您被分配到" + chuangwei01 + "，确认分配宿舍吗？");
-					$("#sushe-quxiao").click(function() {
-						$("#sushe-querenzz").stop().fadeOut();
-					});
-					//确认并跳转
-					var info = [{
-						"chmc": chuangwei01,
-						"chbm": chuangwei00
-					}];
-
-					// $("#sushe-querenbut").on("click", function () {
-					$("#sushe-querenbut").unbind("click").click(function() {
-						$("#sushe-querenzz").stop().fadeOut();
-						$(".jiazai").stop().fadeIn(800);
-						//ajax
-						$.ajax({
-							type: "post",
-							url: "mobileStudentController.do?dosaveDrom",
-							dataType: "json",
-							data: {
-								info: JSON.stringify(info)
-							},
-							async: false,
-							success: function(data) {
-								console.log('success');
-
-								if(data.success == true) {
-
-									$(".jiazai").stop().fadeOut(800);
-									//alert(data.msg);
-									$("#page2").stop().fadeOut();
-									$("#page3").stop().fadeIn();
-									n = 2;
-									gaoliangtop(n);
-									$("#xuansushe").removeClass("subbut").addClass("subbut-visited").unbind("click");
-									benciliucheng++;
-									buttonclick(buttn);
-								} else {
-
-									$(".jiazai").stop().fadeOut(800);
-									//alert(data.msg);
-									$("#sushe-querenzz").stop().fadeIn();
-									$("#sushe-queren-z p").text(data.msg);
-									$("#sushe-quxiao").hide();
-									$("#sushe-querenbut").hide();
-									$("#querenbut-sushe1").show().click(function() {
-										$("#chuangwei00 option").remove();
-										$("#sushe-querenzz").stop().fadeOut();
-
-										//获取宿舍信息
-										var dropid = "";
-										var susheOBJmc;
-										var susheOBJid;
-										$("#qinshi00 option").remove();
-										$("#qinshi00").css("width", "0");
-										$("#qinshijiazai").show();
-										$("#qinshi00").append('<option value="none">请选择</option>');
-										$.ajax({
-											type: "post",
-											dataType: "json",
-											url: "mobileStudentController.do?getDromList",
-											data: {
-
-												pid: dropid
-											},
-											success: function(data) {
-												//	alert("jiazai");
-												//console.log(data);
-												var end = data.obj;
-												console.log(data.msg);
-												var obj = $.parseJSON(data.msg);
-
-												if(obj.length != 0) { //判断是否有床位
-													if(end != null && end == "end") { //判断是否为END
-														//	alert(end);
-														for(var i = 0; i < obj.length; i++) {
-															alert("名称：" + obj[i].cname + "ID：" + obj[i].cc);
-														}
-													} else {
-														for(var i = 0; i < obj.length; i++) {
-															//alert("名称：" + obj[i].cname + "ID：" + obj[i].BS);
-															susheOBJmc = obj[i].cname;
-															susheOBJid = obj[i].BS;
-															var susheSEL = '<option value=' + susheOBJid + '>' + susheOBJmc + '</option>';
-															$("#qinshi00").append(susheSEL);
-															var selsize = $("#qinshi00 option").size();
-															if(selsize >= 2) {
-																console.log(selsize);
-																$("#qinshijiazai").hide();
-																$("#qinshi00").css("width", "auto");
-															}
-														}
-
-													}
-
-												} else {
-													//alert("无可用床位！");
-													$("#qinshijiazai").hide();
-													$("#qinshi00").css("width", "auto");
-													$("#qinshi00 option").remove();
-													$("#qinshi00").append('<option value="none">无</option>');
-													$("#chuangwei00 option").remove();
-													$("#chuangwei00").append('<option value="none">无</option>');
-												}
-
-											},
-											error: function(msg) {
-												//alert("error:" + msg);
-												alert("刷新频率过快！");
-											}
-										});
-										$("#chuangwei00").append('<option value="none">请选择</option>');
-										//select change事件 选宿舍 每一次change就给下面的option赋值
-
-									});
-
-								}
-
-							},
-							error: function() {
-								//console.log(data.msg);
-								alert("刷新频率过快！");
-							}
-
-						});
-
-					});
-
-				} else {
-					alert("请选择完整！");
-				}
+				});
 
 			});
 
-			if(liucheng == 3) {
+			//page3 跳转下一步
+			$("#xuansushe").click(function() {
+				//下一步
+				//跳转和样式 开始
+				$("#page3").stop().fadeOut();
+				$("#page4").stop().fadeIn();
+				$(".jiazai").stop().fadeOut(1000);
+				n = 3;
+				isn1 = n;
+				gaoliangtop(n);
+				$(this).removeClass("subbut").addClass("subbut-visited");
+				benciliucheng++;
+				buttonclick(buttn);
+				$("#xuefeizhifubut").unbind().addClass("subbut-visited");
+				//跳转和样式 结束
+			});
+
+			//page4 自选床上用品 保险 并缴费
+			$("#tjxg").click(function() {
+
+				//显示遮罩层
+				$(".zhezhao-queren").stop().fadeIn();
+				$("#main-quxiao0").show();
+				$("#querenzhifu").show();
+				$("#main-quxiao0").click(function() {
+					$(".zhezhao-queren").stop().fadeOut();
+				});
+				$(".queren-wenzi p").text("请点击确定按钮进行支付！").css("margin-top", "20px").css("padding-left", "10px");
+				$("#querenzhifu").click(function() {
+					$('.jiazai').stop().fadeIn();
+					//ajax...
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						url: "mobileStudentController.do?dosaveConsumerinfo",
+						async: true,
+						success: function(data) {
+							if(data.success == true) {
+								//跳转和样式 开始
+								$("#page4").stop().fadeOut();
+								$("#page5").stop().fadeIn();
+								$(".jiazai").stop().fadeOut(1000);
+								n = 4;
+								isn1 = n;
+								gaoliangtop(n);
+								$(this).removeClass("subbut").addClass("subbut-visited");
+								benciliucheng++;
+								buttonclick(buttn);
+								$("#xuefeizhifubut").unbind().addClass("subbut-visited");;
+								//跳转和样式 结束
+
+								//关闭遮罩层
+								$(".zhezhao-queren").stop().fadeOut();
+								//关闭动画
+								$('.jiazai').stop().fadeOut();
+
+							} else {
+								alert(data.msg);
+							}
+
+						},
+						error: function(data) {
+							alert("error");
+						}
+
+					});
+
+				});
+
+			});
+
+			//如果流程等于第一步则获取宿舍信息
+			if(liucheng == 2 ) {
+				//ajax
+				//获取宿舍信息
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "mobileStudentController.do?generatingDrom",
+					async: true,
+					success: function(data) {
+
+						console.log(data);
+						if(data.success == true) {
+							console.log(typeof data.msg);
+							var sshparse = JSON.parse(data.msg);
+							console.log(sshparse[0].ssh);
+							var sshOrign = sshparse[0].ssh;
+							var ssharr = sshOrign.split("-");
+							console.log(ssharr);
+							var ssh = ssharr[0] + "-" + ssharr[1] + "-" + ssharr[2] + "-" + ssharr[3];
+							console.log(ssh);
+							$("#ssh").text(ssh);
+							$("#ssh0").text(ssh);
+							//关闭遮罩层
+							$(".zhezhao-queren").stop().fadeOut();
+							//关闭加载动画】
+							$('.jiazai').stop().fadeOut();
+						} else {
+							//关闭遮罩层
+							$(".zhezhao-queren").stop().fadeOut();
+							//关闭加载动画】
+							$('.jiazai').stop().fadeOut();
+							//打开遮罩层 提示失败
+							$(".zhezhao-queren").stop().fadeIn();
+							$("#querenbut-main").show();
+							$("#main-quxiao").hide();
+							$("#main-querenbut").hide();
+							$("#querenbut-main").click(function() {
+								$(".zhezhao-queren").stop().fadeOut();
+							});
+							$(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
+							//填充msg
+							$("#ssh").text(data.msg);
+							//下一页按钮灰色
+							$("#xuansushe").hide().next().show();
+						}
+					},
+					error: function(data) {
+						console.log(data);
+					}
+
+				});
+				//获取宿舍信息end
+
+			}
+			//如果流程等于第五步则加载第六步骤信息
+			if(liucheng == 5||liucheng==3) {
 				//为下一页准备
 				$.ajax({
 					type: "post",
@@ -817,6 +503,16 @@ $(document).ready(function() {
 							$("#bzrdh").html(obj.bzrdh);
 							$("#ssmc").html(obj.ssmc);
 
+							//第三流程给宿舍赋值
+							
+							var sshOrign = obj.ssmc;
+							var ssharr = sshOrign.split("-");
+							console.log(ssharr);
+							var ssh = ssharr[0] + "-" + ssharr[1] + "-" + ssharr[2] + "-" + ssharr[3];
+							console.log(ssh);
+							$("#ssh").text(ssh);
+							$("#ssh0").text(ssh);
+							//栋
 							var ssmcstr = obj.ssmc;
 							if(ssmcstr != null && ssmcstr != "null" && ssmcstr != "" && ssmcstr != undefined && ssmcstr != "undefined") {
 								var ldmcLocation = ssmcstr.indexOf("栋") + 1;
@@ -854,8 +550,8 @@ $(document).ready(function() {
 
 			}
 
-			//page7
-			//抵校信息页 radio  赋值
+			//page5 到校登记
+			//抵校信息页 radio样式控制  赋值
 			$(".radio-wrap").click(function() {
 				$(this).siblings().children(".radio-button").removeClass("radio-but-on");
 				$(this).children(".radio-button").addClass("radio-but-on");
@@ -917,9 +613,10 @@ $(document).ready(function() {
 			console.log(wenti3);
 			console.log(wenti4);
 			console.log(wenti5);
+			//提交信息
 			$("#dixiaobut").click(function() {
 				$(".jiazai").stop().fadeIn(800);
-				//为下一页准备
+				//为下一页准备 获取信息
 				$.ajax({
 					type: "post",
 					dataType: "json",
@@ -969,11 +666,8 @@ $(document).ready(function() {
 					}
 				});
 
-				//				if(dixiaoTime==undefined){
-				//					alert('khfsdviwf');
-				//				}
-
 				console.log(chezhan);
+				//判断非空
 				if(baodao != null && dixiaoTime != undefined && jiaotong != null && peitong != null && chezhan != "" && chezhan != "none" && chezhan != undefined) {
 					//	ajax
 					var info = [{
@@ -1009,23 +703,19 @@ $(document).ready(function() {
 						async: true,
 						success: function(data) {
 							console.log(data.msg);
-							n = 3;
+							n = 5;
 							gaoliangtop(n);
 							benciliucheng++;
 							$(".jiazai").stop().fadeOut(800);
 							$(this).removeClass("subbut").addClass("subbut-visited");
 
-							$("#page3").stop().fadeOut();
-							$("#page4").stop().fadeIn();
+							$("#page5").stop().fadeOut();
+							$("#page6").stop().fadeIn();
 						},
 						error: function(data) {
 							console.log(data.msg);
 						}
 					});
-
-					//$("#banji").html(bjmc);
-					//$("#yddh").html(yddh);
-					//$("#fdyxm").html(fdyxm);
 
 				} else {
 					$(".jiazai").stop().fadeOut(800);
@@ -1102,7 +792,7 @@ $(document).ready(function() {
 
 	});
 
-	//新增内容2017-06-21---------start
+/*	//新增内容2017-06-21---------start
 
 	//家庭信息四项控制 家庭人口数 人均年收入 过往病史 家庭类型 
 	//家庭人口数
@@ -1170,7 +860,7 @@ $(document).ready(function() {
 		}
 
 	});
-
+*/
 	//基本信息填QQ邮箱QQmail隐藏显示  caijing财经
 	var youxiang
 	$("#inputout2").click(function() {
@@ -1434,51 +1124,51 @@ $(document).ready(function() {
 	$(".geren-touxiang img").attr('src', "plug-in/weixin/yx/images/yicun.png");
 
 	//是否选购床上用品动画控制
-	$(".sfxuangouyp").click(function(){
-		$(this).children(".duigou").show().prev().show().parent().siblings().children(".duigou").hide().prev().hide();
+	$(".sfxuangouyp").click(function() {
+		$(this).children(".duigou").show().prev().css("color","#1296DB").css("font-weight","bloder").parent().siblings().children(".duigou").hide().prev().css("color","#555").css("font-weight","normal");
 	});
 
-		var zsf=1000;
-		var csypf=0;
-		var bxf=0;
-		var zjje;
-		var sfxgcsyp;
-		var sfxgbx;
-	$(document).ready(function(){
-		sfxgcsyp= $('input:radio[name="xgcsyp"]:checked').val();
-		sfxgbx= $('input:radio[name="xgbx"]:checked').val();
-		$("#bxgcsyp").click(function(){
-			sfxgcsyp="N";
-			csypf=0;
+	var zsf = 1000;
+	var csypf = 0;
+	var bxf = 0;
+	var zjje;
+	var sfxgcsyp;
+	var sfxgbx;
+	$(document).ready(function() {
+		sfxgcsyp = $('input:radio[name="xgcsyp"]:checked').val();
+		sfxgbx = $('input:radio[name="xgbx"]:checked').val();
+		$("#bxgcsyp").click(function() {
+			sfxgcsyp = "N";
+			csypf = 0;
 			console.log(csypf);
-			zjje=zsf+csypf+bxf;
+			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
 		});
-		$("#xgcsyp").click(function(){
-			sfxgcsyp="Y";
-			csypf=200;
+		$("#xgcsyp").click(function() {
+			sfxgcsyp = "Y";
+			csypf = 200;
 			console.log(csypf);
-			zjje=zsf+csypf+bxf;
+			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
 		});
-		$("#bxgbx").click(function(){
-			sfxgbx="N"
-			bxf=0;
+		$("#bxgbx").click(function() {
+			sfxgbx = "N"
+			bxf = 0;
 			console.log(bxf);
-			zjje=zsf+csypf+bxf;
+			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
 		});
-		$("#xgbx").click(function(){
-			sfxgbx="Y";
-			bxf=500;
+		$("#xgbx").click(function() {
+			sfxgbx = "Y";
+			bxf = 500;
 			console.log(bxf);
-			zjje=zsf+csypf+bxf;
+			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
 		});
 	});
-	$("#tjxg").click(function(){
-		console.log(zsf+csypf+bxf);
-		
+	$("#tjxg").click(function() {
+		console.log(zsf + csypf + bxf);
+
 	});
 
 });
