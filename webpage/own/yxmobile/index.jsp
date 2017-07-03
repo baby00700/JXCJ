@@ -206,7 +206,20 @@
 	</head>
 
 	<body>
+		<!--遮罩层 开始-->
+		<div class="zhezhao-queren" id="zhezhao">
+			<div class="querenkuang">
+				<div class="queren-wenzi">
+					<p></p>
+				</div>
+				<div class="conbut" id="querenbut-main" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
+				
+				<div class="conbut" id="main-quxiao" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
+				<div class="conbut" id="main-querenbut" style="display:none;">确定</div>
+			</div>
+		</div>
 
+		<!--遮罩层 结束-->
 		<div class="tip" style="display:none"></div>
 		<div class="jiazai" style="display:none;">
 			<div id="spinner"></div>
@@ -277,39 +290,7 @@
 									<li class="xinxi-list"><span class="xinxi-title">生源所在地</span><span class="xinxi-con">${studentInfo.syd}</span></li>
 									<li class="xinxi-list"><span class="xinxi-title">毕业学校</span><span class="xinxi-con">${studentInfo.byxx}</span></li>
 
-									<!-- 新增内容2017-06-21  start -->
-
-									<!--
-						<li class="xinxi-list"><span class="xinxi-title">家庭人口数<span style="color:red">*</span></span><span class="xinxi-con"><p style="margin-bottom:0;color:#555" class="inputprks">请输入家庭人口数</p><input type="text" maxlength="2" class="inputtext jtrks" style="margin-bottom: 0px" autofocus="autofocus" id="stMobile"/></span></li>
-		                  <li class="xinxi-list"><span class="xinxi-title">人均年收入<span style="color:red">*</span></span><span class="xinxi-con" ><p style="margin-bottom:0;color:#555" class="inputpnsr">请输入人均年收入</p><input type="text" maxlength="10" class="rjnsr inputtext" style="margin-bottom: 0px" autofocus="autofocus" id="stMobile"/></span></li>
-		                  <li class="xinxi-list"><span class="xinxi-title">过往病史</span><span class="xinxi-con" ><p style="margin-bottom:0;color:#555" class="inputpbs">请输入过往病史</p><input type="text" class="gwbs inputtext" style="margin-bottom: 0px" autofocus="autofocus" id="stMobile"/></span></li>
-
-
-				                  <div class="radio-line" style="height:45px;">
-
-				                    <div id="jtlxz" class="xuan-sushe">
-				                      <div class="sushe-title" id="jtlxsel" style="left:10px;">家庭类型<span style="color:red">*</span></div>
-				                      <div class="select-sushe" id="select-chezhan" style="width:70%">
-				                        <select name="chezhan" class="select-sushe-class" id="jtlxselect">
-				                          <option value="其他">其他</option>
-				                          <option value="建档立卡贫困户">建档立卡贫困户</option>
-				                          <option value="农村低保家庭学生">农村低保家庭学生</option>
-				                          <option value="农村特困救助供养学生">农村特困救助供养学生</option>
-				                          <option value="孤儿">孤儿</option>
-				                          <option value="残疾">残疾</option>
-				                          <option value="单亲">单亲</option>
-				                          <option value="烈士子女或优抚对象子女">烈士子女或优抚对象子女</option>
-				                          <option value="家庭遭受自然灾害或突发事件学生">家庭遭受自然灾害或突发事件学生</option>
-
-				                        </select>
-				                      </div>
-
-				                      <div class="youjiantou"></div>
-				                    </div>
-
-				                  </div>
-	-->
-									<!-- end -->
+						
 
 									<li class="xinxi-list"><span class="xinxi-title">家庭住址<span style="color:red">*</span></span>
 									</li>
@@ -351,17 +332,6 @@
 															<label>家长电话</label>
 															<input type="text" placeholder="请输入手机号码" id="jzdh1" class="inputjzdh" maxlength="11" value="${studentInfo.jtdh1}">
 														</div>
-
-														<%--<div class="mui-input-row">--%>
-														<%--<label>家长身份证号</label>--%>
-														<%--<input type="text" placeholder="请输入身份证号" id="jzsfzh1" class="inputjzsfzh" maxlength="18" value="${studentInfo.sfzh1}">--%>
-														<%--</div>--%>
-
-														<%--<div class="mui-input-row">--%>
-														<%--<label>亲属关系</label>--%>
-														<%--<input type="text" placeholder="请输入与学生亲属关系" id="jzgx1" class="inputjzgx" maxlength="5" value="${studentInfo.jtgx1}">--%>
-														<%--</div>--%>
-
 														<div class="mui-input-row">
 															<label>亲属关系</label>
 															<input type="text" placeholder="请选择与学生亲属关系" id="jzgx1" class="inputjzgx" maxlength="5" value="${studentInfo.jtgx1}" style="text-align: right;height:40px;font-size:10pt" readonly="readonly">
@@ -506,7 +476,9 @@
 				</div>
 
 				<div class="spage" id="page2">
-
+					
+					
+					
 					<div class="gerenxinxi">
 						<div class="gerenxinxi-biaoti">
 							<div class="gerenbiaoti-tubiao"></div>
@@ -697,46 +669,32 @@
 						</div>
 					</div>
 					<div class="sushe-fenpei">
-						<div id="sushe-qinshi" class="xuan-sushe">
-							<div class="sushe-title">寝室号</div>
-							<div class="select-sushe" id="select-qinshi">
-								<select name="qinshihao" class="select-sushe-class" id="qinshi00">
-									<option value="none">请选择</option>
-								</select>
-							</div>
-							<div class="jiazaitubiao" style="display: none;" id="qinshijiazai"></div>
-							<div class="youjiantou"></div>
-						</div>
-						<div id="chuangwei" class="xuan-sushe">
-							<div class="sushe-title">床位号</div>
-							<div class="select-sushe" id="select-chuangwei">
-								<select name="chuangweihao" class="select-sushe-class" id="chuangwei00">
-									<option value="none">请选择</option>
-								</select>
-							</div>
-							<div class="jiazaitubiao" style="display: none;" id="chuangweijiazai"></div>
-							<div class="youjiantou"></div>
-						</div>
+						<li class="xinxi-list"><span class="xinxi-title">宿舍号</span><span class="xinxi-con" id="ssh"></span></li>
 					</div>
 
-					<div class="zhezhao-queren" id="sushe-querenzz">
-						<div class="querenkuang">
-							<div class="queren-wenzi" id="sushe-queren-z">
-								<p></p>
-							</div>
-							<div class="conbut" id="sushe-quxiao">取消</div>
-							<div class="conbut" id="sushe-querenbut">确定分配</div>
-							<div class="conbut" id="querenbut-sushe1" style="width:100%;text-align: center;line-height:47px;display:none">确定</div>
-						</div>
-					</div>
-
-					<div class="subbut" id="xuansushe">确认分配</div>
-					<!--<div class="sub-non subbut-visited">已提交</div>-->
+					<div class="subbut" id="xuansushe">下一步</div>
+					<div class="sub-non subbut-visited" style="display:none">下一步</div>
 
 				</div>
 
 				<div class="spage" id="page4">
-
+					
+					<!--遮罩层 开始-->
+					<div class="zhezhao-queren" id="zhezhao">
+						<div class="querenkuang">
+							<div class="queren-wenzi">
+								<p></p>
+							</div>
+							<div class="conbut" id="querenbut-main0" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
+							
+							<div class="conbut" id="main-quxiao0" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
+							<div class="conbut" id="querenzhifu" style="display:none;">确定</div>
+						</div>
+					</div>
+			
+					<!--遮罩层 结束-->
+					
+					
 					<div class="gerenxinxi">
 						<div class="gerenxinxi-biaoti">
 							<div class="gerenbiaoti-tubiao"></div>
@@ -781,8 +739,10 @@
 							<div class="zhusufei-tubiao"></div>
 							<div class="zhusufei-wenzi">住宿费</div>
 						</div>
-						<li class="xinxi-list">
-							<span class="xinxi-title">住宿费</span><span class="xinxi-con">1000元</span></li>
+						<li class="xinxi-list"><span class="xinxi-title">宿舍号</span><span class="xinxi-con" id="ssh0"></span></li>
+						<li class="xinxi-list"><span class="xinxi-title">住宿费</span><span class="xinxi-con">1000元</span></li>
+
+
 					</div>
 					<div class="xuangouyp">
 						
@@ -793,18 +753,18 @@
 						
 						
 						<div class="sfxz">
-							<div class="sfxuangouyp">
+							<div class="sfxuangouyp" id="bxgcsyp">
 								<p>不选购床上用品</p>
 								<div class="csypjg" style="display:  block;">￥0元</div>
 								<div class="duigou"></div>
-								<input type="radio" name="xgcsyp" id="xgcsyp" value="N" style="display: none;"/>
+								<input type="radio" name="xgcsyp"  value="N" style="display: none;"/>
 							</div>
 							
-							<div class="sfxuangouyp" >
+							<div class="sfxuangouyp" id="xgcsyp">
 								<p>选购床上用品</p>
-								<div class="csypjg" style="display: none;">￥200元</div>
+								<div class="csypjg" style="display: block;">￥200元</div>
 								<div class="duigou" style="display:none"></div>
-								<input type="radio" name="xgcsyp" id="xgcsyp" value="Y" style="display: none;"/>
+								<input type="radio" name="xgcsyp"  value="Y" style="display: none;"/>
 							</div>
 							
 						</div>
@@ -818,26 +778,27 @@
 						</div>
 						
 						<div class="sfxz">
-							<div class="sfxuangouyp">
+							<div class="sfxuangouyp" id="bxgbx">
 								<p>不选购保险</p>
 								<div class="csypjg" style="display:  block;">￥0元</div>
 								<div class="duigou"></div>
-								<input type="radio" name="xgbx" id="xgbx" value="N" style="display: none;"/>
+								<input type="radio" name="xgbx"  value="N" style="display: none;"/>
 							</div>
 							
-							<div class="sfxuangouyp" >
+							<div class="sfxuangouyp" id="xgbx">
 								<p>选购保险</p>
-								<div class="csypjg" style="display: none;">￥500元</div>
+								<div class="csypjg" style="display: block;">￥500元</div>
 								<div class="duigou" style="display:none"></div>
-								<input type="radio" name="xgbx" id="bxgbx" value="Y" style="display: none;"/>
+								<input type="radio" name="xgbx"  value="Y" style="display: none;"/>
 							</div>
 							
 						</div>
 					</div>
-					<div class="querenxinxi" style="text-align: right;padding-right:15px;font-size:14px;color:red;margin-top:5px;">总计<span>0</span>元</div>
+					<div class="querenxinxi" style="text-align: right;padding-right:15px;font-size:14px;color:red;margin-top:5px;">总计<span>1000</span>元</div>
 					<div class="querenxinxi">请认真核对个人信息，确保无误后点击提交支付</div>
 					<!--支付其他费用 end-->
 					<div class="subbut" id="tjxg" style="margin-top:5px;">提交支付</div>
+					<div class="subbut" id="tjxg0" style="margin-top:5px; display:none">已支付</div>
 					
 
 				</div>

@@ -6,8 +6,7 @@
 
 	<head>
 
-
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes">
@@ -20,102 +19,93 @@
 		<script src="plug-in/weixin/yx/js/owl.carousel.min.js"></script>
 	</head>
 	<style>
-	
+
 	</style>
 
 	<script type="text/javascript">
-		var stuaddr="${studentInfo.address }";
-		var xbtouxing="${studentInfo.xb }";//1男2女
+		var stuaddr = "${studentInfo.address }";
 
-		
-
-		$(document).ready(function(){
-	    		if(xbtouxing==1){
-	    			$(".touxiang").css("background-image","url(plug-in/weixin/yx//images/touxiangnan.png)");
-	    		}else if(xbtouxing==2){
-	    			$(".touxiang").css("background-image","url(plug-in/weixin/yx//images/touxiangnv.png)");
-	    		}else{
-	    			$(".touxiang").css("background-image","url(plug-in/weixin/yx//images/touxiang.png)");
-	    		}
-	    	});
-
-
-            	var rows = 3;//每页显示记录数
-	    	var page = 1;//当前页
-	    	var total = 0;//总记录数
-	    	var field = "id,title,columnId,summary,createDate,imageName,imageHref,accountid,";//字段
-	    	var sort = "createDate";
-	    	var order = "desc";
-	    	var columnId = "402881e44695183a01469522f7d20019";//当前栏目id//
-	    	var $moreBtn = $("#j-viewmore");//显示更多按钮
-		    //数据加载
-		    function loadData(){
-				if ($("#j-viewmore").hasClass("disabled")) {
-					return;
-				}
-				$("#j-viewmore").html("努力加载中…").addClass("disabled");
-	    		$.ajax({
-	                type: "GET",
-	                url: "cmsController.do?getMenuList",
-	                data: {columnid:columnId, field:field, rows:rows,page:page,sort:sort,order:order},
-	                dataType: "json",
-	                success: function(data){
-	                            $.each(data, function(key, value){
-		                            if(key=="rows"){
-			                            for(var i = 1; i < value.length; i++){
-				                        //	console.log("article",value[i]);
-				                        	var title1=value[0].title;
-								if(title1.length>18){
-									title1=title1.substr(0,18)+"...";
-								}
-				                        	var imageHref1=value[0].imageHref;
-				                        	var id1=value[0].id;
-				                        	var idurl1="cmsController.do?goPage&page=article&articleid="+id1;
-				                        	var title=value[i].title;
-								if(title.length>12){
-									title=title.substr(0,12)+"...";
-								}
-								
-				                        	var imageHref=value[i].imageHref;
-				                        	var id=value[i].id;
-				                    		var summary=value[i].summary;
-								if(summary.length>16){
-									summary=summary.substr(0,16)+"...";
-								}
-				                    		var createDate=value[i].createDate;
-				                    		var idurl="cmsController.do?goPage&page=article&articleid="+id;
-				                    		var datecon =createDate.substr(0,10);
-				                        	//console.log(imageHref);
-				                        	//console.log(title);
-				                        	//console.log(id);
-				                        	//console.log(summary);
-			                            	//setData(value[i]);
-			                            	var htmlcon='<div class="list"><a href='+idurl+	'><div class="box"><div class="left"><img src='+imageHref+'></div><div class="right"><h1>'+title+'</h1><p class="summary"><font>'+summary+'</font></p><span>'+datecon+'</span></p></div></div></a></div>';
-			                            	$("#list").append(htmlcon);
-			                            }
-			                            	var htmlcon1='<a href='+idurl1+'><div class="tp" id="tp">'+'<img src='+imageHref1+'><span>'+title1+'</span>'+'</div></a>'
-			                            $("#tp").html(htmlcon1);
-			                           	 //console.log(imageHref1);
-			                           	// console.log(title1);
-			                            //	 console.log(id1);
-			                        }
-			                        if(key=="total"){
-			                        	total = value;
-				                    }
-	                            });
-	            		        if ((page * rows) >= total){
-	            		        	$("#j-viewmore").html("已显示全部").addClass("disabled");
-	            					$moreBtn.off('click');
-	            				} else {
-	            					page++;
-	            					$("#j-viewmore").html("查看更多").removeClass("disabled");
-	            				}
-	                         }
-	            });
+		var rows = 3; //每页显示记录数
+		var page = 1; //当前页
+		var total = 0; //总记录数
+		var field = "id,title,columnId,summary,createDate,imageName,imageHref,accountid,"; //字段
+		var sort = "createDate";
+		var order = "desc";
+		var columnId = "402881e44695183a01469522f7d20019"; //当前栏目id//
+		var $moreBtn = $("#j-viewmore"); //显示更多按钮
+		//数据加载
+		function loadData() {
+			if($("#j-viewmore").hasClass("disabled")) {
+				return;
 			}
-			loadData();
+			$("#j-viewmore").html("努力加载中…").addClass("disabled");
+			$.ajax({
+				type: "GET",
+				url: "cmsController.do?getMenuList",
+				data: {
+					columnid: columnId,
+					field: field,
+					rows: rows,
+					page: page,
+					sort: sort,
+					order: order
+				},
+				dataType: "json",
+				success: function(data) {
+					$.each(data, function(key, value) {
+						if(key == "rows") {
+							for(var i = 1; i < value.length; i++) {
+								//	console.log("article",value[i]);
+								var title1 = value[0].title;
+								if(title1.length > 18) {
+									title1 = title1.substr(0, 18) + "...";
+								}
+								var imageHref1 = value[0].imageHref;
+								var id1 = value[0].id;
+								var idurl1 = "cmsController.do?goPage&page=article&articleid=" + id1;
+								var title = value[i].title;
+								if(title.length > 12) {
+									title = title.substr(0, 12) + "...";
+								}
 
-
+								var imageHref = value[i].imageHref;
+								var id = value[i].id;
+								var summary = value[i].summary;
+								if(summary.length > 16) {
+									summary = summary.substr(0, 16) + "...";
+								}
+								var createDate = value[i].createDate;
+								var idurl = "cmsController.do?goPage&page=article&articleid=" + id;
+								var datecon = createDate.substr(0, 10);
+								//console.log(imageHref);
+								//console.log(title);
+								//console.log(id);
+								//console.log(summary);
+								//setData(value[i]);
+								var htmlcon = '<div class="list"><a href=' + idurl + '><div class="box"><div class="left"><img src=' + imageHref + '></div><div class="right"><h1>' + title + '</h1><p class="summary"><font>' + summary + '</font></p><span>' + datecon + '</span></p></div></div></a></div>';
+								$("#list").append(htmlcon);
+							}
+							var htmlcon1 = '<a href=' + idurl1 + '><div class="tp" id="tp">' + '<img src=' + imageHref1 + '><span>' + title1 + '</span>' + '</div></a>'
+							$("#tp").html(htmlcon1);
+							//console.log(imageHref1);
+							// console.log(title1);
+							//	 console.log(id1);
+						}
+						if(key == "total") {
+							total = value;
+						}
+					});
+					if((page * rows) >= total) {
+						$("#j-viewmore").html("已显示全部").addClass("disabled");
+						$moreBtn.off('click');
+					} else {
+						page++;
+						$("#j-viewmore").html("查看更多").removeClass("disabled");
+					}
+				}
+			});
+		}
+		loadData();
 	</script>
 
 	<body>
@@ -125,9 +115,8 @@
 					<p></p>
 				</div>
 				<div class="conbut" id="querenbut-main" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
-    <div class="conbut" id="main-quxiao" style="display:none;box-sizing: border-box;border-right:1px solid
-    #ccc">取消</div>
-    <div class="conbut" id="main-querenbut" style="display:none;">确定</div>
+				<div class="conbut" id="main-quxiao" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
+				<div class="conbut" id="main-querenbut" style="display:none;">确定</div>
 			</div>
 		</div>
 		<div class="stuinfo">
@@ -137,23 +126,26 @@
 
 				<div class="wenzi">
 					<div class="xingming">
-    录取姓名：
-    <span class="shuju" id="mingzi">${studentInfo.xm}</span><a href="mobileStudentController.do?myinfo#sf"><span id="laizi">来自 <span id="diqu">${studentInfo.sfmc }</span>
-	</span></a>
+						录取姓名：
+						<span class="shuju" id="mingzi">${studentInfo.xm}</span>
+						<a href="mobileStudentController.do?myinfo#sf"><span id="laizi">来自 <span id="diqu">${studentInfo.sfmc }</span>
+							</span>
+						</a>
 					</div>
 					<div class="luquxibu">
-	录取院系：<a href="mobileStudentController.do?myinfo#lqxy"><span class="shuju" id="luqubuxi">${studentInfo.xymc }</span></a>
+						录取院系：
+						<a href="mobileStudentController.do?myinfo#lqxy"><span class="shuju" id="luqubuxi">${studentInfo.xymc }</span></a>
 					</div>
 					<div class="luquzhuanye">
-	录取专业：<a href="mobileStudentController.do?myinfo#lqzy"><span class="shuju" id="luquzhuanye">${studentInfo.zymc }</span></a>
+						录取专业：
+						<a href="mobileStudentController.do?myinfo#lqzy"><span class="shuju" id="luquzhuanye">${studentInfo.zymc }</span></a>
 					</div>
 					<div class="zt" style="position:relative">
-					当前状态：
-							<span class="zhuangtaicon" id="bddone" style="color:red;white-space: nowrap;">
+						当前状态：
+						<span class="zhuangtaicon" id="bddone" style="color:red;white-space: nowrap;">
 							已完成报名！
 							</span>
-  <span class="shuaxinmain"></span>
-
+						<span class="shuaxinmain"></span>
 
 					</div>
 				</div>
@@ -226,180 +218,156 @@
 
 		</div>
 		<div class="more" style="width:100%;background-color: #fff;">
-				<a href="cmsController.do?goPage&page=menu&id=402881e44695183a01469522f7d20019">加载更多</a>
+			<a href="cmsController.do?goPage&page=menu&id=402881e44695183a01469522f7d20019">加载更多</a>
 		</div>
 
 	</body>
 
 	<script>
-	//function shuxinX(){
+		//function shuxinX(){
 		//刷新方法
-        var sfjf;
+		var sfjf;
+
 		function reloadout() {
 
 			$.ajax({
 				type: "post",
-				timeout:5000,
+				timeout: 5000,
 				url: "mobileStudentController.do?refresh",
 				async: true,
 				success: function(data) {
 
-                     sfjf="${studentInfo.sfjf}";
-					window.location.href="mobileStudentController.do?goLogin&"+new Date();
+					sfjf = "${studentInfo.sfjf}";
+					window.location.href = "mobileStudentController.do?goLogin&" + new Date();
 
 				},
-				complete:function(XMLHttpRequest,status){ //请求完成后最终执行参数
-				if(status=='timeout'){//超时,status还有success,error等值的情况
-				 alert("连接超时");
-				}
+				complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+					if(status == 'timeout') { //超时,status还有success,error等值的情况
+						alert("连接超时");
+					}
 				}
 			});
 		}
 
-
-		var throttle = function (fn, delay, atleast) {
+		var throttle = function(fn, delay, atleast) {
 			var timer = null;
 			var previous = null;
-			return function () {
+			return function() {
 				var now = +new Date();
-				if ( !previous ) previous = now;
-				if ( now - previous > atleast ) {
+				if(!previous) previous = now;
+				if(now - previous > atleast) {
 
 					fn();
 					previous = now;
 				} else {
 					clearTimeout(timer);
 					timer = setTimeout(function() {
-					fn();
-				}, delay);
+						fn();
+					}, delay);
 				}
 			}
 		};
 
-		var f = throttle(reloadout, 500,2000);
+		var f = throttle(reloadout, 500, 2000);
 
+		$(".shuaxinmain").toggle(function() {
+				$(this).removeClass("xuanzhuan1").addClass("xuanzhuan0");
 
+				setTimeout(f(), 100);
+			},
+			function() {
+				$(this).removeClass("xuanzhuan0").addClass("xuanzhuan1");
+				setTimeout(f(), 100);
+			}
+		);
 
+		$(document).ready(function() {
 
-	$(".shuaxinmain").toggle(function() {
-		$(this).removeClass("xuanzhuan1").addClass("xuanzhuan0");
-			
-			setTimeout(f(), 100);
-		},
-		function() {
-			$(this).removeClass("xuanzhuan0").addClass("xuanzhuan1");
-			setTimeout(f(), 100);
-		}
-	);
-
-
-	$(document).ready(function() {
-
-	var countAjax = null;  
-	countAjax=$.ajax({
-		type : "post",
-		dataType : "json",
-		url : "mobileStudentController.do?getSumCount",
-		async:true,
-		
-		success : function(data) {
-		var obj = $.parseJSON(data.msg);
-			//alert(obj.bjcount+"**" + obj.zycount +"**"+ obj.sscount);
-		var bjcount=obj.bjcount;
-		var zycount=obj.zycount;
-		var sscount=obj.sscount;
-		$(".tongbanji-s").html(bjcount);
-		$(".tongzhuanye-s").html(zycount);
-		$(".tongsushe-s").html(sscount);
-
-		},
-		
-		error : function(msg) {
-			countAjax.abort();
-			
-		}
-	});
-
-
-	
-
-	$(".loginout").click(function(){
-		countAjax.abort();
-	$("#querenbut-main").hide();
-	$(".zhezhao-queren").stop().fadeIn();
-	$("#main-quxiao").show();
-	$("#main-querenbut").show();
-	$("#main-quxiao").click(function() {
-		$(".zhezhao-queren").stop().fadeOut();
-	});
-	$("#main-querenbut").click(function() {
-		$.ajax({
+			var countAjax = null;
+			countAjax = $.ajax({
 				type: "post",
-				url: "mobileStudentController.do?cancelUser",
-				async: true,
 				dataType: "json",
+				url: "mobileStudentController.do?getSumCount",
+				async: true,
+
 				success: function(data) {
-				if(data.success==true){
-					window.location.href="mobileStudentController.do?goLogin";
-				
-				}else{
-					alert("注销失败！");
-				}
-					
-				
+					var obj = $.parseJSON(data.msg);
+					//alert(obj.bjcount+"**" + obj.zycount +"**"+ obj.sscount);
+					var bjcount = obj.bjcount;
+					var zycount = obj.zycount;
+					var sscount = obj.sscount;
+					$(".tongbanji-s").html(bjcount);
+					$(".tongzhuanye-s").html(zycount);
+					$(".tongsushe-s").html(sscount);
+
 				},
-				complete:function(XMLHttpRequest,status){ //请求完成后最终执行参数
-					if(status=='timeout'){//超时,status还有success,error等值的情况
-					 alert("连接超时");
-					}
+
+				error: function(msg) {
+					countAjax.abort();
+
 				}
 			});
-	});
-	$(".queren-wenzi p").text("是否确认注销本帐号？");
-		
-			
-		
-		
-	});
-	
 
+			$(".loginout").click(function() {
+				countAjax.abort();
+				$("#querenbut-main").hide();
+				$(".zhezhao-queren").stop().fadeIn();
+				$("#main-quxiao").show();
+				$("#main-querenbut").show();
+				$("#main-quxiao").click(function() {
+					$(".zhezhao-queren").stop().fadeOut();
+				});
+				$("#main-querenbut").click(function() {
+					$.ajax({
+						type: "post",
+						url: "mobileStudentController.do?cancelUser",
+						async: true,
+						dataType: "json",
+						success: function(data) {
+							if(data.success == true) {
+								window.location.href = "mobileStudentController.do?goLogin";
 
+							} else {
+								alert("注销失败！");
+							}
 
+						},
+						complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+							if(status == 'timeout') { //超时,status还有success,error等值的情况
+								alert("连接超时");
+							}
+						}
+					});
+				});
+				$(".queren-wenzi p").text("是否确认注销本帐号？");
 
-	
-	
+			});
 
+			var isbddone = "${studentInfo.sfyx}";
 
+			var sfjf = "${studentInfo.sfjf}";
+			if(sfjf == "N") {
+				$("#bddone").show().html("未缴费！").next().show().next().show();
+			} else {
+				$("#bddone").show().html("已缴费！").next().show().next().show();
+			}
 
-	var isbddone="${studentInfo.sfyx}";
+			//当前状态
 
-	var sfjf="${studentInfo.sfjf}";
-	if(sfjf=="N"){
-	$("#bddone").show().html("未缴费！").next().show().next().show();
-	}else{
-	$("#bddone").show().html("已缴费！").next().show().next().show();
-    }
+			//验证是否院系报到
 
-
-    //当前状态
-
-
-    //验证是否院系报到
-
-
-			if(isbddone=="N"){
+			if(isbddone == "N") {
 				//是否领取要是
-			//验证电脑端是否有数据
-			var flowname = "${studentInfo.flowname}";
-			var iskey = "${studentInfo.sfcollar_key}";
-			
+				//验证电脑端是否有数据
+				var flowname = "${studentInfo.flowname}";
+				var iskey = "${studentInfo.sfcollar_key}";
 
 				if((flowname == "" || flowname == "null") && iskey == "N") {
 
 					$.ajax({
 						type: "post",
 						dataType: "json",
-						timeout : 5000,//超时5秒
+						timeout: 5000, //超时5秒
 						url: "mobileStudentController.do?isRegister",
 						success: function(data) {
 							var su = data.success;
@@ -432,136 +400,130 @@
 						error: function(msg) {
 							alert("error:" + msg);
 						},
-						complete:function(XMLHttpRequest,status){ //请求完成后最终执行参数
-						if(status=='timeout'){//超时,status还有success,error等值的情况
-						
-						 alert("连接超时");
-						}
+						complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+							if(status == 'timeout') { //超时,status还有success,error等值的情况
+
+								alert("连接超时");
+							}
 						}
 					});
 
-				} else  {
-					if(iskey=="Y"){
-						
+				} else {
+					if(iskey == "Y") {
+
 						$(".zhezhao-queren").stop().fadeIn();
 						$("#querenbut-main").show();
 						$("#querenbut-main").click(function() {
 							$(".zhezhao-queren").stop().fadeOut();
 						});
 
-						$(".queren-wenzi p").text("您已领取钥匙,请到"+stuaddr+"进行报道!");
-						
-					
-					
+						$(".queren-wenzi p").text("您已领取钥匙,请到" + stuaddr + "进行报道!");
+
 					}
 
 				};
 
-			}else{
-                  $("#bddone").show().html("已完成报道！").next().hide().next().hide();
+			} else {
+				$("#bddone").show().html("已完成报道！").next().hide().next().hide();
 			}
 
-
-
 			$("#zizhubaodao").click(function() {
-			if(isbddone=="N"){
-				if((flowname == "" || flowname == "null") && iskey == "N") {
+				if(isbddone == "N") {
+					if((flowname == "" || flowname == "null") && iskey == "N") {
 
-					$.ajax({
-						type: "post",
-						dataType: "json",
-						url: "mobileStudentController.do?isRegister",
-	                    timeout : 5000,//超时5秒
-						success: function(data) {
-							var su = data.success;
-							var obj = data.msg;
-							if(su == true) {
-								var sfjf = "${studentInfo.sfjf}"; //是否缴费；
-								
-								if(sfjf == "Y") {
-									$(".zhezhao-queren").stop().fadeIn();
-									$("#main-quxiao").show();
-									$("#main-querenbut").show();
-									$("#main-quxiao").click(function() {
-										$(".zhezhao-queren").stop().fadeOut();
-									});
-									$("#main-querenbut").click(function() {
-										window.location.href = "mobileStudentController.do?index";
-									});
+						$.ajax({
+							type: "post",
+							dataType: "json",
+							url: "mobileStudentController.do?isRegister",
+							timeout: 5000, //超时5秒
+							success: function(data) {
+								var su = data.success;
+								var obj = data.msg;
+								if(su == true) {
+									var sfjf = "${studentInfo.sfjf}"; //是否缴费；
 
-									$(".queren-wenzi p").text("是否进入自助报道流程？");
-									//window.location.href = "mobileStudentController.do?index";
+									if(sfjf == "Y") {
+										$(".zhezhao-queren").stop().fadeIn();
+										$("#main-quxiao").show();
+										$("#main-querenbut").show();
+										$("#main-quxiao").click(function() {
+											$(".zhezhao-queren").stop().fadeOut();
+										});
+										$("#main-querenbut").click(function() {
+											window.location.href = "mobileStudentController.do?index";
+										});
+
+										$(".queren-wenzi p").text("是否进入自助报道流程？");
+										//window.location.href = "mobileStudentController.do?index";
+									} else {
+										$(".zhezhao-queren").stop().fadeIn();
+										$("#querenbut-main").show();
+										$("#querenbut-main").click(function() {
+											$(".zhezhao-queren").stop().fadeOut();
+										});
+
+										$(".queren-wenzi p").text("您未缴费！请到5教一楼大厅缴费后进行报道！");
+									}
+
 								} else {
 									$(".zhezhao-queren").stop().fadeIn();
-									$("#querenbut-main").show();
 									$("#querenbut-main").click(function() {
 										$(".zhezhao-queren").stop().fadeOut();
 									});
-
-									$(".queren-wenzi p").text("您未缴费！请到5教一楼大厅缴费后进行报道！");
+									$("#querenbut-main").show();
+									$(".queren-wenzi p").text(obj);
+									//alert(obj);
 								}
-
-							} else {
-								$(".zhezhao-queren").stop().fadeIn();
-								$("#querenbut-main").click(function() {
-									$(".zhezhao-queren").stop().fadeOut();
-								});
-								$("#querenbut-main").show();
-								$(".queren-wenzi p").text(obj);
-								//alert(obj);
+							},
+							error: function(msg) {
+								alert("error:" + msg);
+							},
+							complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+								if(status == 'timeout') { //超时,status还有success,error等值的情况
+									alert("连接超时");
+								}
 							}
-						},
-						error: function(msg) {
-                        alert("error:" + msg);
-                        },
-                        complete:function(XMLHttpRequest,status){ //请求完成后最终执行参数
-	                        if(status=='timeout'){//超时,status还有success,error等值的情况
-	                        alert("连接超时");
-	                        }
-                        }
-					});
+						});
 
-                    } else {
-                    if(iskey=="Y"){
-                                alert("您已领取钥匙,请到"+stuaddr+"进行报道!");
-								$("#querenbut-main").hide();
-                                $(".zhezhao-queren").stop().fadeIn();
-                                $("#main-quxiao").show();
-                                $("#main-querenbut").show();
-                                $("#main-quxiao").click(function() {
-                                $(".zhezhao-queren").stop().fadeOut();
-                                });
-                                $("#main-querenbut").click(function() {
-                                window.location.href = "mobileStudentController.do?myinfo";
-                                });
+					} else {
+						if(iskey == "Y") {
+							alert("您已领取钥匙,请到" + stuaddr + "进行报道!");
+							$("#querenbut-main").hide();
+							$(".zhezhao-queren").stop().fadeIn();
+							$("#main-quxiao").show();
+							$("#main-querenbut").show();
+							$("#main-quxiao").click(function() {
+								$(".zhezhao-queren").stop().fadeOut();
+							});
+							$("#main-querenbut").click(function() {
+								window.location.href = "mobileStudentController.do?myinfo";
+							});
 
-                                $(".queren-wenzi p").text("您已报名,是否查看报名详情？");
-                            //window.location.href = "mobileStudentController.do?index";
-                            }else{
-                                $(".zhezhao-queren").stop().fadeIn();
-                                $("#main-quxiao").show();
-                                $("#main-querenbut").show();
-                                $("#main-quxiao").click(function() {
-                                $(".zhezhao-queren").stop().fadeOut();
-                                });
-                                $("#main-querenbut").click(function() {
-								  window.location.href = "mobileStudentController.do?myinfo";
-                                });
+							$(".queren-wenzi p").text("您已报名,是否查看报名详情？");
+							//window.location.href = "mobileStudentController.do?index";
+						} else {
+							$(".zhezhao-queren").stop().fadeIn();
+							$("#main-quxiao").show();
+							$("#main-querenbut").show();
+							$("#main-quxiao").click(function() {
+								$(".zhezhao-queren").stop().fadeOut();
+							});
+							$("#main-querenbut").click(function() {
+								window.location.href = "mobileStudentController.do?myinfo";
+							});
 
-                                $(".queren-wenzi p").text("您已报名,是否查看报名详情？");
-                                //window.location.href = "mobileStudentController.do?index";
-                    }
+							$(".queren-wenzi p").text("您已报名,是否查看报名详情？");
+							//window.location.href = "mobileStudentController.do?index";
+						}
 
-				};
-			}else{
-				window.location.href = "mobileStudentController.do?myinfo";
+					};
+				} else {
+					window.location.href = "mobileStudentController.do?myinfo";
 
-			}
-
+				}
 
 			});
 		});
 	</script>
-
 
 </html>
