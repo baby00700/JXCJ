@@ -115,10 +115,20 @@
 					<p></p>
 				</div>
 				<div class="conbut" id="querenbut-main" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
+				
 				<div class="conbut" id="main-quxiao" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
 				<div class="conbut" id="main-querenbut" style="display:none;">确定</div>
+
+				<div class="conbut" id="querenbut-main0" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
+				
+				<div class="conbut" id="main-quxiao0" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
+				
+				<div class="conbut" id="main-querenbut0" style="display:none;">确定</div>
+				
 			</div>
 		</div>
+
+		
 		<div class="stuinfo">
 			<div class="jibenxinxi">
 				<div class="touxiang"></div>
@@ -311,13 +321,18 @@
 			$(".loginout").click(function() {
 				countAjax.abort();
 				$("#querenbut-main").hide();
+				$("#main-quxiao").hide();
+				$("#main-querenbut").hide();
+
 				$(".zhezhao-queren").stop().fadeIn();
-				$("#main-quxiao").show();
-				$("#main-querenbut").show();
-				$("#main-quxiao").click(function() {
+				$("#main-quxiao0").show();
+				$("#main-querenbut0").show();
+				$("#main-quxiao0").click(function() {
 					$(".zhezhao-queren").stop().fadeOut();
+
 				});
-				$("#main-querenbut").click(function() {
+				$("#main-querenbut0").unbind().click(function() {
+					
 					$.ajax({
 						type: "post",
 						url: "mobileStudentController.do?cancelUser",
@@ -357,35 +372,23 @@
 			//验证是否院系报到
 
 			if(isbddone == "N") {
-				//是否领取要是
+				//是否领取钥匙
 				//验证电脑端是否有数据
 				var flowname = "${studentInfo.flowname}";
-				var iskey = "${studentInfo.sfcollar_key}";
 
-				if((flowname == "" || flowname == "null") && iskey == "N") {
+
+				if(flowname == "" || flowname == "null") {
 
 					$.ajax({
 						type: "post",
 						dataType: "json",
 						timeout: 5000, //超时5秒
-						url: "mobileStudentController.do?isRegister",
+						url: "mobileStudentController.do?isRegister",//判断是否在时间内
 						success: function(data) {
 							var su = data.success;
 							var obj = data.msg;
 							if(su == true) {
-								var sfjf = "${studentInfo.sfjf}"; //是否缴费；
-								//sfjf = "Y";
-								if(sfjf == "Y") {
-									//window.location.href = "mobileStudentController.do?index";
-								} else {
-									$(".zhezhao-queren").stop().fadeIn();
-									$("#querenbut-main").show();
-									$("#querenbut-main").click(function() {
-										$(".zhezhao-queren").stop().fadeOut();
-									});
 
-									$(".queren-wenzi p").text("您未缴费！请到5教一楼大厅缴费后进行报道！");
-								}
 
 							} else {
 								$(".zhezhao-queren").stop().fadeIn();
@@ -408,28 +411,15 @@
 						}
 					});
 
-				} else {
-					if(iskey == "Y") {
-
-						$(".zhezhao-queren").stop().fadeIn();
-						$("#querenbut-main").show();
-						$("#querenbut-main").click(function() {
-							$(".zhezhao-queren").stop().fadeOut();
-						});
-
-						$(".queren-wenzi p").text("您已领取钥匙,请到" + stuaddr + "进行报道!");
-
-					}
-
-				};
+				}
 
 			} else {
 				$("#bddone").show().html("已完成报道！").next().hide().next().hide();
 			}
 
-			$("#zizhubaodao").click(function() {
+			$("#zizhubaodao").unbind().click(function() {
 				if(isbddone == "N") {
-					if((flowname == "" || flowname == "null") && iskey == "N") {
+					if(flowname == "" || flowname == "null") {
 
 						$.ajax({
 							type: "post",
@@ -440,30 +430,21 @@
 								var su = data.success;
 								var obj = data.msg;
 								if(su == true) {
-									var sfjf = "${studentInfo.sfjf}"; //是否缴费；
-
-									if(sfjf == "Y") {
+										$("#querenbut-main").hide();
+										$("#main-quxiao0").hide();
+										$("#main-querenbut0").hide();
+										
 										$(".zhezhao-queren").stop().fadeIn();
 										$("#main-quxiao").show();
 										$("#main-querenbut").show();
 										$("#main-quxiao").click(function() {
-											$(".zhezhao-queren").stop().fadeOut();
+										$(".zhezhao-queren").stop().fadeOut();
 										});
-										$("#main-querenbut").click(function() {
-											window.location.href = "mobileStudentController.do?index";
+										$("#main-querenbut").unbind().click(function() {
+										window.location.href = "mobileStudentController.do?index";
 										});
 
 										$(".queren-wenzi p").text("是否进入自助报道流程？");
-										//window.location.href = "mobileStudentController.do?index";
-									} else {
-										$(".zhezhao-queren").stop().fadeIn();
-										$("#querenbut-main").show();
-										$("#querenbut-main").click(function() {
-											$(".zhezhao-queren").stop().fadeOut();
-										});
-
-										$(".queren-wenzi p").text("您未缴费！请到5教一楼大厅缴费后进行报道！");
-									}
 
 								} else {
 									$(".zhezhao-queren").stop().fadeIn();
@@ -486,36 +467,7 @@
 						});
 
 					} else {
-						if(iskey == "Y") {
-							alert("您已领取钥匙,请到" + stuaddr + "进行报道!");
-							$("#querenbut-main").hide();
-							$(".zhezhao-queren").stop().fadeIn();
-							$("#main-quxiao").show();
-							$("#main-querenbut").show();
-							$("#main-quxiao").click(function() {
-								$(".zhezhao-queren").stop().fadeOut();
-							});
-							$("#main-querenbut").click(function() {
-								window.location.href = "mobileStudentController.do?myinfo";
-							});
-
-							$(".queren-wenzi p").text("您已报名,是否查看报名详情？");
-							//window.location.href = "mobileStudentController.do?index";
-						} else {
-							$(".zhezhao-queren").stop().fadeIn();
-							$("#main-quxiao").show();
-							$("#main-querenbut").show();
-							$("#main-quxiao").click(function() {
-								$(".zhezhao-queren").stop().fadeOut();
-							});
-							$("#main-querenbut").click(function() {
-								window.location.href = "mobileStudentController.do?myinfo";
-							});
-
-							$(".queren-wenzi p").text("您已报名,是否查看报名详情？");
-							//window.location.href = "mobileStudentController.do?index";
-						}
-
+						window.location.href = "mobileStudentController.do?myinfo";
 					};
 				} else {
 					window.location.href = "mobileStudentController.do?myinfo";

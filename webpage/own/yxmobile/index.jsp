@@ -18,6 +18,7 @@
 		<script src="plug-in/weixin/yx/js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 
 		<script type="text/javascript" src="plug-in/weixin/yx/js/jquery.qrcode.js"></script>
+	   
 		<script src="plug-in/weixin/yx/js/yingxin.js" type="text/javascript" charset="utf-8"></script>
 
 		<title>新生报名</title>
@@ -56,11 +57,6 @@
 			var kssj = "${studentInfo.startDate}";
 			var jssj = "${studentInfo.endDate}";
 
-			//新增内容20170621
-			var jtrks1 = "${studentInfo.jtrks}";
-			var rjnsr1 = "${studentInfo.rjnsr}";
-			var gwbs1 = "${studentInfo.gwbs}";
-			var jtlx1 = "${studentInfo.jtlx}";
 
 			var sfzh = "${studentInfo.sfzh}";
 
@@ -97,7 +93,15 @@
 			var xstz1 = "${studentInfo.xstz}";
 			var fzcc1 = "${studentInfo.fzcc}";
 			var xzcc1 = "${studentInfo.xzcc}";
-
+			var email = "${studentInfo.email}";
+			var sfjzsf="${studentInfo.sfjzsf}";
+			var isbddone = "${studentInfo.sfyx}";//是否院系报到
+			var stuaddr = "${studentInfo.address }"; //院系报到地址
+			var csypf = 0;
+			var bxf = 0;
+			var zjje=0;
+			var sfxgcsyp="N";
+			var sfxgbx="N";
 			$(document).ready(function() {
 
 				if(jzxm1 == null || jzxm1 == "null" || jzxm1 == "") {
@@ -263,6 +267,21 @@
 			<div class="dibu">
 
 				<div class="spage" id="page1">
+
+				<!--遮罩层 开始-->
+				<div class="zhezhao-queren" id="PAGE1zhezhao">
+					<div class="querenkuang">
+						<div class="queren-wenzi">
+							<p></p>
+						</div>
+						<div class="conbut" id="querenbut-PAGE1main" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
+
+						<div class="conbut" id="PAGE1main-quxiao" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
+						<div class="conbut" id="PAGE1main-querenbut" style="display:none;">确定</div>
+					</div>
+				</div>
+
+				<!--遮罩层 结束-->
 
 					<div class="biao-xinxi">
 						<div class="grxx">
@@ -471,7 +490,7 @@
 					</div>
 
 					<div class="subbut" id="gerenxinxibut">下一步</div>
-					<!--<div class="sub-non subbut-visited">已提交</div>-->
+					<div class="sub-non subbut-visited" style="display:none">已提交</div>
 
 				</div>
 
@@ -506,8 +525,7 @@
 										<span class="xinxi-title">录取学院</span><span class="xinxi-con">${studentInfo.xymc}</span></li>
 									<li class="xinxi-list">
 										<span class="xinxi-title">录取专业</span><span class="xinxi-con">${studentInfo.zymc}</span></li>
-									<li class="xinxi-list">
-										<span class="xinxi-title">班级名称</span><span class="xinxi-con">${studentInfo.bjmc}</span></li>
+
 									<li class="xinxi-list">
 										<span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
 								</div>
@@ -616,9 +634,10 @@
 							</ul>
 						</div>
 					</div>
-					<div class="querenxinxi">认真核对个人信息，确保无误后点击在线支付</div>
+					<div class="querenxinxi" id="xuefeitip">认真核对个人信息，确保无误后点击在线支付</div>
 					<div class="subbut" id="xuefeizhifubut">确认支付</div>
-					<div class="sub-non subbut-visited">已支付</div>
+                    <div class="subbut" id="xuefeinext" style="display:none;">下一步</div>
+					<div class="sub-non subbut-visited" style="display:none;">已支付</div>
 				</div>
 
 				<div class="spage" id="page3">
@@ -651,7 +670,7 @@
 									<li class="xinxi-list">
 										<span class="xinxi-title">录取专业</span><span class="xinxi-con">${studentInfo.zymc}</span></li>
 									<li class="xinxi-list">
-										<span class="xinxi-title">班级名称</span><span class="xinxi-con">${studentInfo.bjmc}</span></li>
+										<span class="xinxi-title">班级名称</span><span class="xinxi-con bjmctop" >${studentInfo.bjmc}</span></li>
 									<li class="xinxi-list">
 										<span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
 								</div>
@@ -723,7 +742,7 @@
 									<li class="xinxi-list">
 										<span class="xinxi-title">录取专业</span><span class="xinxi-con">${studentInfo.zymc}</span></li>
 									<li class="xinxi-list">
-										<span class="xinxi-title">班级名称</span><span class="xinxi-con">${studentInfo.bjmc}</span></li>
+										<span class="xinxi-title">班级名称</span><span class="xinxi-con bjmctop" >${studentInfo.bjmc}</span></li>
 									<li class="xinxi-list">
 										<span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
 								</div>
@@ -740,7 +759,7 @@
 							<div class="zhusufei-wenzi">住宿费</div>
 						</div>
 						<li class="xinxi-list"><span class="xinxi-title">宿舍号</span><span class="xinxi-con" id="ssh0"></span></li>
-						<li class="xinxi-list"><span class="xinxi-title">住宿费</span><span class="xinxi-con">1000元</span></li>
+						<li class="xinxi-list"><span class="xinxi-title">住宿费</span><span class="xinxi-con" id="zsf">1000元</span></li>
 
 
 					</div>
@@ -762,7 +781,7 @@
 							
 							<div class="sfxuangouyp" id="xgcsyp">
 								<p>选购床上用品</p>
-								<div class="csypjg" style="display: block;">￥200元</div>
+								<div class="csypjg" style="display: block;">￥400元</div>
 								<div class="duigou" style="display:none"></div>
 								<input type="radio" name="xgcsyp"  value="Y" style="display: none;"/>
 							</div>
@@ -787,17 +806,18 @@
 							
 							<div class="sfxuangouyp" id="xgbx">
 								<p>选购保险</p>
-								<div class="csypjg" style="display: block;">￥500元</div>
+								<div class="csypjg" style="display: block;">￥120元</div>
 								<div class="duigou" style="display:none"></div>
 								<input type="radio" name="xgbx"  value="Y" style="display: none;"/>
 							</div>
 							
 						</div>
 					</div>
-					<div class="querenxinxi" style="text-align: right;padding-right:15px;font-size:14px;color:red;margin-top:5px;">总计<span>1000</span>元</div>
-					<div class="querenxinxi">请认真核对个人信息，确保无误后点击提交支付</div>
+					<div class="querenxinxi" id="xgtip0" style="text-align: right;padding-right:15px;font-size:14px;color:red;margin-top:5px;">总计<span>0</span>元</div>
+					<div class="querenxinxi" id="xgtip">请认真核对个人信息，确保无误后点击提交支付</div>
 					<!--支付其他费用 end-->
 					<div class="subbut" id="tjxg" style="margin-top:5px;">提交支付</div>
+                     <div class="subbut" id="tjxgnext" style="margin-top:20px;display:none;">下一步</div>
 					<div class="subbut" id="tjxg0" style="margin-top:5px; display:none">已支付</div>
 					
 
@@ -833,7 +853,7 @@
 									<li class="xinxi-list">
 										<span class="xinxi-title">录取专业</span><span class="xinxi-con">${studentInfo.zymc}</span></li>
 									<li class="xinxi-list">
-										<span class="xinxi-title">班级名称</span><span class="xinxi-con">${studentInfo.bjmc}</span></li>
+										<span class="xinxi-title">班级名称</span><span class="xinxi-con bjmctop" >${studentInfo.bjmc}</span></li>
 									<li class="xinxi-list">
 										<span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
 								</div>
@@ -1041,7 +1061,7 @@
 									<li class="xinxi-list">
 										<span class="xinxi-title">录取专业</span><span class="xinxi-con">${studentInfo.zymc}</span></li>
 									<li class="xinxi-list">
-										<span class="xinxi-title">班级名称</span><span class="xinxi-con">${studentInfo.bjmc}</span></li>
+										<span class="xinxi-title">班级名称</span><span class="xinxi-con bjmctop" >${studentInfo.bjmc}</span></li>
 									<li class="xinxi-list">
 										<span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
 								</div>
@@ -1050,6 +1070,18 @@
 								</div>
 							</ul>
 						</div>
+					</div>
+
+					<div class="wrap-tiaoma">
+					<div class="tiaoma-biaoti">
+					<div class="tiaoma-tubiao"></div>
+					<div class="tiaoma-wenzi">条形码</div>
+					</div>
+					<div class="tiaoma-img" style="width:260px;margin:0 auto">
+					<img id="barcode" width="260px" />
+					</div>
+
+					<!--<div id="2dcode" style="width:250px;margin:0 auto;position:relative;top:40px;"></div>-->
 					</div>
 
 					<div class="banzhuren">
@@ -1076,8 +1108,12 @@
 									<span class="info-con" id="ssmc"></span>
 								</li>
 								<li class="list-info">
-									<span class="info-title">是否领取钥匙</span>
-									<span class="info-con" id="yaoshi"></span>
+									<span class="info-title">是否院系报到</span>
+									<span class="info-con" id="yuanxi"></span>
+								</li>
+								<li class="list-info">
+									<span class="info-title">院系报到地址</span>
+									<span class="info-con" id="yuanxiadr">"${studentInfo.address }"</span>
 								</li>
 							</ul>
 						</div>
@@ -1087,46 +1123,7 @@
 					<div class="subbut" id="goMain">返回主页</div>
 
 				</div>
-				<!--
-				
-			<div>
-				<div id="pagepcState" style="width:100%;height:100%;position:fixed;top:0px;left:0px;background-color:rgba(0,0,0,0.5);z-index:1000">	 
-					
-					<div class="gerenxinxi" >
-						<div class="gerenxinxi-biaoti" style="margin-top:0px;">
-							<div class="gerenbiaoti-tubiao"></div>
-							<div class="gerenbiaoti-wenzi">个人信息</div>
-						</div>
-						<div class="gerenxinxi-con">
-							<ul>
-								<li class="xinxi-list">
-									<span class="xinxi-title">头像</span><span class="xinxi-con"><div class="geren-touxiang"><img src="plug-in/weixin/yx/images/head.png"/></div></span></li>
-								<li class="xinxi-list">
-									<span class="xinxi-title">考生号</span><span class="xinxi-con">${studentInfo.ksh}</span></li>
-								<li class="xinxi-list">
-									<span class="xinxi-title">姓名</span><span class="xinxi-con">${studentInfo.xm}</span></li>
-								
-									<li class="xinxi-list">
-										<span class="xinxi-title">录取学院</span><span class="xinxi-con">${studentInfo.xymc}</span></li>
-									<li class="xinxi-list">
-										<span class="xinxi-title">录取专业</span><span class="xinxi-con">${studentInfo.zymc}</span></li>
-									<li class="xinxi-list">
-										<span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
-								
-							</ul>
-						</div>
-					</div>
-					
-					<div class="daoxiangxq">
-						<div class="daoxiaoxq-biaoti">
-							<div class="daoxiaoxq-tubiao"></div>
-							<div class="daoxiaoxq-wenzi">报道详情</div>
-						</div>
-					</div>
-				</div>
-			</div>
-	
-		-->
+
 			</div>
 
 	</body>
@@ -1308,6 +1305,24 @@
 		})(mui);
 
 		$(document).ready(function() {
+
+
+            //判断是否缴费若缴费则隐藏
+            if(sfjf=="Y"){
+				//交学费页面显示隐藏
+                $(".feiyongxinxi ul li").hide();
+                $(".feiyongxinxi ul").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;">你已缴费，请点击下一步进入下一流程！</li>')
+            	$("#xuefeizhifubut").hide();
+				$("#xuefeitip").hide();
+				$("#xuefeinext").show();
+			};
+
+				if(sfjzsf=="Y"){
+					//交住宿费页面
+					$("#zsf").text("已交").css("color","red");
+				}
+
+
 			//返回主页
 			$("#goMain").click(function() {
 				window.location.href = "mobileStudentController.do?goMain";

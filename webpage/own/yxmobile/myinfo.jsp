@@ -31,6 +31,10 @@
 			var dixiaoTime;
 			var sfjf = "${studentInfo.sfjf}";
 			var sfcollar_key = "${studentInfo.sfcollar_key}";
+			var sfxgcsyp="${studentInfo.sfxgcsyp}";
+			var sfxgbx="${studentInfo.sfxgbx}";
+
+
 		</script>
 	</head>
 
@@ -78,8 +82,9 @@
 					<li class="xinxi-list"><span class="xinxi-title">宿舍名称</span><span class="xinxi-con">${studentInfo.ssmc}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">班主任</span><span class="xinxi-con">${studentInfo.fdyxm}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">班主任电话</span><span class="xinxi-con">${studentInfo.yddh}</span></li>
-					<li class="xinxi-list"><span class="xinxi-title">是否领取钥匙</span><span class="xinxi-con" id="yaoshi">${studentInfo.sfcollar_key}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">是否缴费</span><span class="xinxi-con" id="sfjf">${studentInfo.sfjf}</span></li>
+					<li class="xinxi-list"><span class="xinxi-title">是否选购床上用品</span><span class="xinxi-con" id="xgcsyp"></span></li>
+					<li class="xinxi-list"><span class="xinxi-title">是否选购保险</span><span class="xinxi-con" id="xgbx"></span></li>
 					
 					
 
@@ -155,6 +160,24 @@
 					$(".xinxi-list").eq(i).children(".xinxi-con").text("—");
 				}
 			}
+
+
+			if(sfxgcsyp=="N"){
+			$("#xgcsyp").text("否");
+
+			}else if(sfxgcsyp=="Y"){
+			$("#xgcsyp").text("是");
+			}else{
+			$("#xgcsyp").text("—");
+			};
+
+			if(sfxgbx=="N"){
+			$("#xgbx").text("否");
+			}else if(sfxgbx=="Y"){
+			$("#xgbx").text("是");
+			}else{
+			$("#xgbx").text("—");
+			};
 			//判断性别
 			
 			if(xb == '1') {

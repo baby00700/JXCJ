@@ -89,188 +89,330 @@ $(document).ready(function() {
 			//点击底部按钮 提交数据 跳转下一页 并禁用事件
 			//page1
 			$("#gerenxinxibut").unbind("click").on("click", function() {
+				$("#PAGE1zhezhao").stop().fadeIn();
+				$("#PAGE1main-quxiao").show();
+				$("#PAGE1main-querenbut").show();
+                $("#PAGE1main-quxiao").unbind().click(function(){
+                    $("#PAGE1zhezhao").stop().fadeOut();
+                    $("#PAGE1main-quxiao").hide();
+                    $("#PAGE1main-querenbut").hide();
+				});
+                $(".queren-wenzi p").text("是否确认提交？提交后不可更改！").css("margin-top", "10px").css("padding-left", "10px");
+                $("#PAGE1main-querenbut").unbind().click(function(){
+                    //判断必填项是否为空
+                    //定义变量
+                    var stmobile1 = $("#inputout p").html();
+                    console.log(stmobile1);
+                    if(stmobile1 == "null" || stmobile1 == "" || stmobile1 == undefined || stmobile1 == null) {
+                        var mobile = $("#stMobile").val(); //手机号
+                        $("#inputout p").html("请输入手机号");
+                    } else {
+                        var mobile = sjh; //手机号
+                    }
 
-				//判断必填项是否为空
-				//定义变量
-				var stmobile1 = $("#inputout p").html();
-				console.log(stmobile1);
-				if(stmobile1 == "null" || stmobile1 == "" || stmobile1 == undefined || stmobile1 == null) {
-					var mobile = $("#stMobile").val(); //手机号
-					$("#inputout p").html("请输入手机号");
-				} else {
-					var mobile = sjh; //手机号
-				}
+                    var stmail = $("#inputout2 input").val();
+                    console.log(stmail);
+                    if(stmail == "null" || stmail == "" || stmail == undefined || stmail == null) {
+                        var youxiang = $("#stmail").val();
 
-				var stmail = $("#inputout2 input").val();
-				console.log(stmail);
-				if(stmail == "null" || stmail == "" || stmail == undefined || stmail == null) {
-					var youxiang = $("#stmail").val();
+                        $("#stmail").attr('placeholder', ' 请重新输入');
+                    } else {
+                        var youxiang = stmail;
+                    }
 
-					$("#stmail").attr('placeholder', ' 请重新输入');
-				} else {
-					var youxiang = stmail;
-				}
+                    console.log(mobile);
+                    var syd = $("#stShengyuan").val(); //生源地
+                    var jtdz = $("#jiatingzhuzhi").val(); //家庭住址
 
-				console.log(mobile);
-				var syd = $("#stShengyuan").val(); //生源地
-				var jtdz = $("#jiatingzhuzhi").val(); //家庭住址
+                    var jtmc1 = $("#jzxm1").val(); //家长姓名123
+                    var jtmc2 = $("#jzxm2").val();
+                    var jtmc3 = $("#jzxm3").val();
+                    var jtdh1 = $("#jzdh1").val(); //电话123
+                    var jtdh2 = $("#jzdh2").val();
+                    var jtdh3 = $("#jzdh3").val();
 
-				var jtmc1 = $("#jzxm1").val(); //家长姓名123
-				var jtmc2 = $("#jzxm2").val();
-				var jtmc3 = $("#jzxm3").val();
-				var jtdh1 = $("#jzdh1").val(); //电话123
-				var jtdh2 = $("#jzdh2").val();
-				var jtdh3 = $("#jzdh3").val();
+                    var jtgx1 = $("#jzgx1").val(); //关系123
+                    var jtgx2 = $("#jzgx2").val();
+                    var jtgx3 = $("#jzgx3").val();
+                    var xssg = $("#stshengao").val(); //身高
+                    var xstz = $("#sttizhong").val(); //体重
+                    var fzcc = $("#fuzhuangchima").val(); //服装尺码
+                    var xzcc = $("#xiezichima").val(); //鞋子尺码
 
-				var jtgx1 = $("#jzgx1").val(); //关系123
-				var jtgx2 = $("#jzgx2").val();
-				var jtgx3 = $("#jzgx3").val();
-				var xssg = $("#stshengao").val(); //身高
-				var xstz = $("#sttizhong").val(); //体重
-				var fzcc = $("#fuzhuangchima").val(); //服装尺码
-				var xzcc = $("#xiezichima").val(); //鞋子尺码
+                    // var jtrksval = $(".jtrks").val();
+                    // var jtnsrval = $(".rjnsr").val();
+                    // var jtgwbsval = $(".gwbs").val();
+                    // var jtlxval = $("#jtlxselect").val();
 
-				var jtrksval = $(".jtrks").val();
-				var jtnsrval = $(".rjnsr").val();
-				var jtgwbsval = $(".gwbs").val();
-				var jtlxval = $("#jtlxselect").val();
+                    var grinfo = [{
+                        "mobile": mobile,
+                        "syd": syd,
+                        "jtdz": jtdz
 
-				var grinfo = [{
-					"mobile": mobile,
-					"syd": syd,
-					"jtdz": jtdz,
-					//"mail": stmail
-				}];
+                    }];
 
-				var jtinfo = [{
-					"jtmc1": jtmc1,
-					"jtmc2": jtmc2,
-					"jtmc3": jtmc3,
-					"jtdh1": jtdh1,
-					"jtdh2": jtdh2,
-					"jtdh3": jtdh3,
+                    var jtinfo = [{
+                        "email": stmail,
+                        "jtmc1": jtmc1,
+                        "jtmc2": jtmc2,
+                        "jtmc3": jtmc3,
+                        "jtdh1": jtdh1,
+                        "jtdh2": jtdh2,
+                        "jtdh3": jtdh3,
 
-					"jtgx1": jtgx1,
-					"jtgx2": jtgx2,
-					"jtgx3": jtgx3,
-					"xssg": xssg,
-					"xstz": xstz,
-					"fzcc": fzcc,
-					"xzcc": xzcc,
-					"jtrks": 0,
-					"rjnsr": 0,
-					"gwbs": 0,
-					"jtlx": 0
+                        "jtgx1": jtgx1,
+                        "jtgx2": jtgx2,
+                        "jtgx3": jtgx3,
+                        "xssg": xssg,
+                        "xstz": xstz,
+                        "fzcc": fzcc,
+                        "xzcc": xzcc,
+                        "jtrks": 0,
+                        "rjnsr": 0,
+                        "gwbs": 0,
+                        "jtlx": 0
 
-				}];
+                    }];
 
-				var otjt1;
-				if(jtmc1 != "" && jtdh1 != "" && jtgx1 != "") {
-					otjt1 = true;
-				} else {
-					otjt1 = false;
-					//	alert("nono");
-				}
+                    var otjt1;
+                    if(jtmc1 != "" && jtdh1 != "" && jtgx1 != "") {
+                        otjt1 = true;
+                    } else {
+                        otjt1 = false;
+                        //	alert("nono");
+                    }
 
-				var otjt2;
-				if(jtmc2 != "" && jtdh2 != "" && jtgx2 != "") {
-					otjt2 = true;
-				} else {
-					otjt2 = false;
-					//alert("nono");
-				}
+                    var otjt2;
+                    if(jtmc2 != "" && jtdh2 != "" && jtgx2 != "") {
+                        otjt2 = true;
+                    } else {
+                        otjt2 = false;
+                        //alert("nono");
+                    }
 
-				var otjt3;
-				if(jtmc3 != "" && jtdh3 != "" && jtgx3 != "") {
-					otjt3 = true;
-				} else {
-					otjt3 = false;
-					//alert("nono");
-				}
-				console.log(mobile);
+                    var otjt3;
+                    if(jtmc3 != "" && jtdh3 != "" && jtgx3 != "") {
+                        otjt3 = true;
+                    } else {
+                        otjt3 = false;
+                        //alert("nono");
+                    }
+                    console.log(mobile);
 
-				if(stmail == "" || mobile == "" || syd == "" || jtdz == "" || xssg == "" || xstz == "" || fzcc == "none" || xzcc == "none") {
-					alert('带"*"的为必填项');
-				} else {
+                    if(stmail == "" || mobile == "" || syd == "" || jtdz == "" || xssg == "" || xstz == "" || fzcc == "none" || xzcc == "none") {
+                        alert('带"*"的为必填项');
+                    } else {
 
-					if(otjt1 == true || otjt2 == true || otjt2 == true) {
+                        if(otjt1 == true || otjt2 == true || otjt2 == true) {
 
-						$(".jiazai").stop().fadeIn(1000);
-						//报名，保存信息
-						//报名方法AJAx
-						$.ajax({
-							type: "post",
-							dataType: "json",
-							url: "mobileStudentController.do?doSignUp",
-							data: {
-								grinfo: JSON.stringify(grinfo),
-								jtinfo: JSON.stringify(jtinfo)
-							},
-							async: true,
-							success: function(data) {
-								var bmsu = data.success;
-								var bmobj = data.msg;
-								if(bmsu == true) {
-									//显示加载
-									$(".jiazai").stop().fadeOut(1000);
+                            $(".jiazai").stop().fadeIn(1000);
+                            //报名，保存信息
+                            //报名方法AJAx
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                url: "mobileStudentController.do?doSignUp",
+                                data: {
+                                    grinfo: JSON.stringify(grinfo),
+                                    jtinfo: JSON.stringify(jtinfo)
+                                },
+                                async: true,
+                                success: function(data) {
+                                    var bmsu = data.success;
+                                    var bmobj = data.msg;
+                                    if(bmsu == true) {
+                                        //显示加载
+                                        $(".jiazai").stop().fadeOut(1000);
+										//隐藏遮罩层
+										$("#PAGE1zhezhao").stop().fadeOut();
+										$("#PAGE1main-quxiao").hide();
+										$("#PAGE1main-querenbut").hide();
+                                        //跳转和样式 开始
+                                        $("#page1").stop().fadeOut();
+                                        $("#page2").stop().fadeIn();
+                                        $(".jiazai").stop().fadeOut(1000);
+                                        n = 1;
+                                        isn1 = n;
+                                        gaoliangtop(n);
+                                       
+                                        benciliucheng++;
+                                        buttonclick(buttn);
+                                        $("#gerenxinxibut").removeClass("subbut").unbind().addClass("subbut-visited");;
+                                        //跳转和样式 结束
+                                    } else {
+                                        $(".jiazai").stop().fadeOut(1000);
+                                        $('#fbbm-queren').stop().fadeIn();
+                                        //$("#wenzi-con").text(obj);
+                                        $("#baoming-fbbut").show();
+                                        console.log("nono11");
+                                        $("#wenzi-con p").text(data.msg);
+                                        $("#baoming-fbbut").click(function() {
+                                            $("#fbbm-queren").stop().fadeOut();
+                                        });
+                                    }
+                                },
+								/*success END*/
+                                error: function() {
+                                    $(".jiazai").stop().fadeOut(1000);
+                                    $('#fbbm-queren').stop().fadeIn();
+                                    //$("#wenzi-con").text(obj);
+                                    $("#baoming-fbbut").show();
+                                    console.log("nono11");
+                                    $("#wenzi-con p").text("连接超时！请稍后重试！");
+                                    $("#baoming-fbbut").click(function() {
+                                        $("#fbbm-queren").stop().fadeOut();
+                                    });
+                                }
+                            });
+                            //b报名方法end
+                        } else {
+                            alert("请至少填写完整一位家长或监护人的信息！");
 
-									//跳转和样式 开始
-									$("#page1").stop().fadeOut();
-									$("#page2").stop().fadeIn();
-									$(".jiazai").stop().fadeOut(1000);
-									n = 1;
-									isn1 = n;
-									gaoliangtop(n);
-									$(this).removeClass("subbut").addClass("subbut-visited");
-									benciliucheng++;
-									buttonclick(buttn);
-									$("#gerenxinxibut").unbind().addClass("subbut-visited");;
-									//跳转和样式 结束
-								} else {
-									$(".jiazai").stop().fadeOut(1000);
-									$('#fbbm-queren').stop().fadeIn();
-									//$("#wenzi-con").text(obj);
-									$("#baoming-fbbut").show();
-									console.log("nono11");
-									$("#wenzi-con p").text(data.msg);
-									$("#baoming-fbbut").click(function() {
-										$("#fbbm-queren").stop().fadeOut();
-									});
-								}
-							},
-							/*success END*/
-							error: function() {
-								$(".jiazai").stop().fadeOut(1000);
-								$('#fbbm-queren').stop().fadeIn();
-								//$("#wenzi-con").text(obj);
-								$("#baoming-fbbut").show();
-								console.log("nono11");
-								$("#wenzi-con p").text("连接超时！请稍后重试！");
-								$("#baoming-fbbut").click(function() {
-									$("#fbbm-queren").stop().fadeOut();
-								});
-							}
-						});
-						//b报名方法end
-					} else {
-						alert("请至少填写完整一位家长或监护人的信息！");
+                        }
+                    }
+				});
 
-					}
-				}
+
 
 			});
 
 			//page2缴费
-			$("#xuefeizhifubut").click(function() {
+
+            //线下已缴费，线上不缴费直接下一步
+            $("#xuefeinext").unbind().click(function(){
+                //显示加载动画
+                $('.jiazai').stop().fadeIn();
+                //ajax...
+                //学费缴费
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "mobileStudentController.do?doSaveJF",
+                    async: true,
+                    success: function(data) {
+                        console.log("点击缴费");
+                        if(data.success == true) {
+
+                            console.log(data.obj);
+                            //给后续的几个页面班级赋值
+                            var banjimcORIGN=data.obj;
+                            var bjmcORIGN=banjimcORIGN.split("-");
+                            var bjmc=bjmcORIGN[1];
+                            $(".bjmctop").text(bjmc);
+
+                            //跳转和样式 开始
+                            $("#page2").stop().fadeOut();
+                            $("#page3").stop().fadeIn();
+                            $(".jiazai").stop().fadeOut(1000);
+                            n = 2;
+                            isn1 = n;
+                            gaoliangtop(n);
+                            $(this).removeClass("subbut").addClass("subbut-visited");
+                            benciliucheng++;
+                            buttonclick(buttn);
+                            $("#xuefeizhifubut").unbind().addClass("subbut-visited");
+                            //跳转和样式 结束
+
+                            //获取宿舍信息
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                url: "mobileStudentController.do?generatingDrom",
+                                async: true,
+                                success: function(data) {
+
+                                    console.log(data);
+                                    if(data.success == true) {
+                                        console.log(typeof data.msg);
+                                        var sshparse = JSON.parse(data.msg);
+                                        console.log(sshparse[0].ssh);
+                                        var sshOrign = sshparse[0].ssh;
+                                        var ssharr = sshOrign.split("-");
+                                        console.log(ssharr);
+                                        var ssh = ssharr[0] + "-" + ssharr[1] + "-" + ssharr[2] + "-" + ssharr[3];
+                                        console.log(ssh);
+                                        $("#ssh").text(ssh);
+                                        $("#ssh0").text(ssh);
+                                        //关闭遮罩层
+                                        $(".zhezhao-queren").stop().fadeOut();
+                                        //关闭加载动画】
+                                        $('.jiazai').stop().fadeOut();
+                                    } else {
+                                        //关闭遮罩层
+                                        $(".zhezhao-queren").stop().fadeOut();
+                                        //关闭加载动画】
+                                        $('.jiazai').stop().fadeOut();
+                                        //打开遮罩层 提示失败
+                                        $(".zhezhao-queren").stop().fadeIn();
+                                        $("#querenbut-main").show();
+                                        $("#main-quxiao").hide();
+                                        $("#main-querenbut").hide();
+                                        $("#querenbut-main").click(function() {
+                                            $(".zhezhao-queren").stop().fadeOut();
+                                        });
+                                        $(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
+                                        //填充msg
+                                        $("#ssh").text(data.msg);
+                                        //下一页按钮灰色
+                                        $("#xuansushe").hide().next().show();
+                                    }
+                                },
+                                error: function(data) {
+                                    console.log(data);
+                                }
+
+                            });
+                            //获取宿舍信息end
+
+                        } else {
+                            //关闭遮罩层
+                            $(".zhezhao-queren").stop().fadeOut();
+                            //关闭加载动画】
+                            $('.jiazai').stop().fadeOut();
+                            //打开遮罩层 提示失败
+                            $(".zhezhao-queren").stop().fadeIn();
+                            $("#querenbut-main").show();
+                            $("#main-quxiao").hide();
+                            $("#main-querenbut").hide();
+                            $("#querenbut-main").click(function() {
+                                $(".zhezhao-queren").stop().fadeOut();
+                            });
+                            $(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
+                        }
+                    },
+                    error: function() {
+                        //关闭遮罩层
+                        $(".zhezhao-queren").stop().fadeOut();
+                        //关闭加载动画】
+                        $('.jiazai').stop().fadeOut();
+                        //打开遮罩层 提示失败
+                        $(".zhezhao-queren").stop().fadeIn();
+                        $("#querenbut-main").show();
+                        $("#main-quxiao").hide();
+                        $("#main-querenbut").hide();
+                        $("#querenbut-main").click(function() {
+                            $(".zhezhao-queren").stop().fadeOut();
+                        });
+                        $(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
+
+                    }
+                });
+
+
+            });
+
+            //线下未交费，线上缴费
+			$("#xuefeizhifubut").unbind('click').click(function() {
 				//显示遮罩层
 				$(".zhezhao-queren").stop().fadeIn();
 				$("#main-quxiao").show();
 				$("#main-querenbut").show();
+				$("#querenbut-main").hide();
 				$("#main-quxiao").click(function() {
 					$(".zhezhao-queren").stop().fadeOut();
 				});
 				$(".queren-wenzi p").text("请点击确定按钮进行支付！").css("margin-top", "20px").css("padding-left", "10px");
-				$("#main-querenbut").click(function() {
+				$("#main-querenbut").unbind('click').click(function() {
 					//显示加载动画
 					$('.jiazai').stop().fadeIn();
 					//ajax...
@@ -281,7 +423,15 @@ $(document).ready(function() {
 						url: "mobileStudentController.do?doSaveJF",
 						async: true,
 						success: function(data) {
+							console.log("点击缴费");
 							if(data.success == true) {
+
+								console.log(data.obj);
+								//给后续的几个页面班级赋值
+								var banjimcORIGN=data.obj;
+								var bjmcORIGN=banjimcORIGN.split("-");
+								var bjmc=bjmcORIGN[1];
+								$(".bjmctop").text(bjmc);
 
 								//跳转和样式 开始
 								$("#page2").stop().fadeOut();
@@ -293,7 +443,7 @@ $(document).ready(function() {
 								$(this).removeClass("subbut").addClass("subbut-visited");
 								benciliucheng++;
 								buttonclick(buttn);
-								$("#xuefeizhifubut").unbind().addClass("subbut-visited");;
+								$("#xuefeizhifubut").unbind().addClass("subbut-visited");
 								//跳转和样式 结束
 
 								//获取宿舍信息
@@ -348,11 +498,36 @@ $(document).ready(function() {
 								//获取宿舍信息end
 
 							} else {
-								alert(data.msg);
+                                //关闭遮罩层
+                                $(".zhezhao-queren").stop().fadeOut();
+                                //关闭加载动画】
+                                $('.jiazai').stop().fadeOut();
+                                //打开遮罩层 提示失败
+                                $(".zhezhao-queren").stop().fadeIn();
+                                $("#querenbut-main").show();
+                                $("#main-quxiao").hide();
+                                $("#main-querenbut").hide();
+                                $("#querenbut-main").click(function() {
+                                    $(".zhezhao-queren").stop().fadeOut();
+                                });
+                                $(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
 							}
 						},
 						error: function() {
-							alert(data.msg);
+                            //关闭遮罩层
+                            $(".zhezhao-queren").stop().fadeOut();
+                            //关闭加载动画】
+                            $('.jiazai').stop().fadeOut();
+                            //打开遮罩层 提示失败
+                            $(".zhezhao-queren").stop().fadeIn();
+                            $("#querenbut-main").show();
+                            $("#main-quxiao").hide();
+                            $("#main-querenbut").hide();
+                            $("#querenbut-main").click(function() {
+                                $(".zhezhao-queren").stop().fadeOut();
+                            });
+                            $(".queren-wenzi p").text(data.msg).css("margin-top", "20px").css("padding-left", "10px");
+
 						}
 					});
 
@@ -378,7 +553,65 @@ $(document).ready(function() {
 			});
 
 			//page4 自选床上用品 保险 并缴费
-			$("#tjxg").click(function() {
+            //下一步
+            $("#tjxgnext").unbind().click(function(){
+                //显示遮罩层
+                $(".zhezhao-queren").stop().fadeIn();
+                $("#main-quxiao0").show();
+                $("#querenzhifu").show();
+                $("#main-quxiao0").click(function() {
+                    $(".zhezhao-queren").stop().fadeOut();
+                });
+                $(".queren-wenzi p").text("确认提交请点击确认按钮！").css("margin-top", "20px").css("padding-left", "10px");
+                $("#querenzhifu").unbind().click(function() {
+                    console.log(sfxgcsyp+sfxgbx);
+                    $('.jiazai').stop().fadeIn();
+                    //ajax...
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: "mobileStudentController.do?dosaveConsumerinfo",
+                        async: true,
+                        data:{
+                            sfxgcsyp:sfxgcsyp,
+                            sfxgbx:sfxgbx
+                        },
+                        success: function(data) {
+                            if(data.success == true) {
+                                //跳转和样式 开始
+                                $("#page4").stop().fadeOut();
+                                $("#page5").stop().fadeIn();
+                                $(".jiazai").stop().fadeOut(1000);
+                                n = 4;
+                                isn1 = n;
+                                gaoliangtop(n);
+                                $("#tjxgnext").removeClass("subbut").addClass("subbut-visited").unbind();
+                                benciliucheng++;
+                                buttonclick(buttn);
+                               
+                                //跳转和样式 结束
+
+                                //关闭遮罩层
+                                $(".zhezhao-queren").stop().fadeOut();
+                                //关闭动画
+                                $('.jiazai').stop().fadeOut();
+
+                            } else {
+                                alert(data.msg);
+                            }
+
+                        },
+                        error: function(data) {
+                            alert("error");
+                        }
+
+                    });
+
+                });
+            });
+
+            //提交缴费
+			$("#tjxg").unbind().click(function() {
 
 				//显示遮罩层
 				$(".zhezhao-queren").stop().fadeIn();
@@ -388,7 +621,8 @@ $(document).ready(function() {
 					$(".zhezhao-queren").stop().fadeOut();
 				});
 				$(".queren-wenzi p").text("请点击确定按钮进行支付！").css("margin-top", "20px").css("padding-left", "10px");
-				$("#querenzhifu").click(function() {
+				$("#querenzhifu").unbind().click(function() {
+				    console.log(sfxgcsyp+sfxgbx);
 					$('.jiazai').stop().fadeIn();
 					//ajax...
 					$.ajax({
@@ -396,6 +630,10 @@ $(document).ready(function() {
 						dataType: "json",
 						url: "mobileStudentController.do?dosaveConsumerinfo",
 						async: true,
+                        data:{
+						    sfxgcsyp:sfxgcsyp,
+                            sfxgbx:sfxgbx
+                        },
 						success: function(data) {
 							if(data.success == true) {
 								//跳转和样式 开始
@@ -405,10 +643,10 @@ $(document).ready(function() {
 								n = 4;
 								isn1 = n;
 								gaoliangtop(n);
-								$(this).removeClass("subbut").addClass("subbut-visited");
+								$("#tjxg").removeClass("subbut").addClass("subbut-visited").unbind();
 								benciliucheng++;
 								buttonclick(buttn);
-								$("#xuefeizhifubut").unbind().addClass("subbut-visited");;
+								
 								//跳转和样式 结束
 
 								//关闭遮罩层
@@ -497,10 +735,19 @@ $(document).ready(function() {
 					success: function(data) {
 						if(data.success == true) {
 							var obj = $.parseJSON(data.msg);
-
+                            if(obj.bzr=="null"||obj.bzr==null){
+                                $("#bzr").html("—");
+                            }else{
+                                $("#bzr").html(obj.bzr);
+                            }
+                            if(obj.bzrdh=="null"||obj.bzrdh==null){
+                                $("#bzrdh").html("—");
+                            }else{
+                                $("#bzrdh").html(obj.bzrdh);
+                            }
 							$("#bjmc").html(obj.bjmc);
-							$("#bzr").html(obj.bzr);
-							$("#bzrdh").html(obj.bzrdh);
+							// $("#bzr").html(obj.bzr);
+							// $("#bzrdh").html(obj.bzrdh);
 							$("#ssmc").html(obj.ssmc);
 
 							//第三流程给宿舍赋值
@@ -513,17 +760,17 @@ $(document).ready(function() {
 							$("#ssh").text(ssh);
 							$("#ssh0").text(ssh);
 							//栋
-							var ssmcstr = obj.ssmc;
-							if(ssmcstr != null && ssmcstr != "null" && ssmcstr != "" && ssmcstr != undefined && ssmcstr != "undefined") {
-								var ldmcLocation = ssmcstr.indexOf("栋") + 1;
-								var xbbldmc = ssmcstr.substring(0, ldmcLocation);
-								var xbbLocation = ssmcstr.indexOf("-") + 1;
-
-								var xbbLength = ssmcstr.length;
-								var ldmc = xbbldmc.substring(xbbLocation, xbbLength);
-								console.log(ldmc);
-								$("#ldmc").html(ldmc);
-							}
+							// var ssmcstr = obj.ssmc;
+							// if(ssmcstr != null && ssmcstr != "null" && ssmcstr != "" && ssmcstr != undefined && ssmcstr != "undefined") {
+							// 	var ldmcLocation = ssmcstr.indexOf("栋") + 1;
+							// 	var xbbldmc = ssmcstr.substring(0, ldmcLocation);
+							// 	var xbbLocation = ssmcstr.indexOf("-") + 1;
+                            //
+							// 	var xbbLength = ssmcstr.length;
+							// 	var ldmc = xbbldmc.substring(xbbLocation, xbbLength);
+							// 	console.log(ldmc);
+							// 	$("#ldmc").html(ldmc);
+							// }
 
 							var ifyaoshi = obj.yslq;
 							if(ifyaoshi == "N") {
@@ -625,10 +872,20 @@ $(document).ready(function() {
 					success: function(data) {
 						if(data.success == true) {
 							var obj = $.parseJSON(data.msg);
-							$("#bjmc").html(obj.bjmc);
-							$("#bzr").html(obj.bzr);
-							$("#bzrdh").html(obj.bzrdh);
-							$("#ssmc").html(obj.ssmc);
+                            if(obj.bzr=="null"||obj.bzr==null){
+                                $("#bzr").html("—");
+                            }else{
+                                $("#bzr").html(obj.bzr);
+                            }
+                            if(obj.bzrdh=="null"||obj.bzrdh==null){
+                                $("#bzrdh").html("—");
+                            }else{
+                                $("#bzrdh").html(obj.bzrdh);
+                            }
+                            $("#bjmc").html(obj.bjmc);
+                            // $("#bzr").html(obj.bzr);
+                            // $("#bzrdh").html(obj.bzrdh);
+                            $("#ssmc").html(obj.ssmc);
 
 							var ssmcstr = obj.ssmc;
 							if(ssmcstr != null && ssmcstr != "null" && ssmcstr != "" && ssmcstr != undefined && ssmcstr != "undefined") {
@@ -707,7 +964,7 @@ $(document).ready(function() {
 							gaoliangtop(n);
 							benciliucheng++;
 							$(".jiazai").stop().fadeOut(800);
-							$(this).removeClass("subbut").addClass("subbut-visited");
+							$("#dixiaobut").removeClass("subbut").addClass("subbut-visited").unbind();
 
 							$("#page5").stop().fadeOut();
 							$("#page6").stop().fadeIn();
@@ -759,10 +1016,10 @@ $(document).ready(function() {
 
 	//判断是否领钥匙
 
-	if(sfcollar_key == "N") {
-		$("#yaoshi").text("否");
+	if(isbddone == "N") {
+		$("#yuanxi").text("否");
 	} else {
-		$("#yaoshi").text("是");
+		$("#yuanxi").text("是");
 	}
 
 	//基本信息填手机号隐藏显示
@@ -861,8 +1118,21 @@ $(document).ready(function() {
 
 	});
 */
-	//基本信息填QQ邮箱QQmail隐藏显示  caijing财经
-	var youxiang
+	//基本信息填QQ邮箱QQmail隐藏显示  财经
+
+	//邮箱二次赋值
+	var stmail=email//fuzhi
+	if(stmail!=""&&stmail!="null"&&stmail!=undefined){
+        $("#inputout2 p").text(stmail);
+        $(".youxiang").val(stmail);
+
+
+	}else{
+        $("#inputout2 p").text("请输入邮箱");
+        $(".youxiang").val();
+	}
+
+	var youxiang;
 	$("#inputout2").click(function() {
 		$("#stMail").focus();
 		$("#inputout2 p").hide().parent().children().last().show().css("border", "0").css("text-align", "right").css("color", "#555");
@@ -890,7 +1160,7 @@ $(document).ready(function() {
 	});
 
 	//select默认加载 
-	if(jtlx1 != "" && jtlx1 != "null" && jtlx1 != null && jtlx1 != undefined && jtlx1 != "undefined") {
+	/*if(jtlx1 != "" && jtlx1 != "null" && jtlx1 != null && jtlx1 != undefined && jtlx1 != "undefined") {
 
 		var jtlxi
 		for(jtlxi = 0; jtlxi < 9; jtlxi++) {
@@ -901,7 +1171,7 @@ $(document).ready(function() {
 				$("#jtlxselect").val(jtlx1);
 			};
 		};
-	};
+	};*/
 	//end
 
 	//生源地
@@ -1128,28 +1398,59 @@ $(document).ready(function() {
 		$(this).children(".duigou").show().prev().css("color","#1296DB").css("font-weight","bloder").parent().siblings().children(".duigou").hide().prev().css("color","#555").css("font-weight","normal");
 	});
 
-	var zsf = 1000;
-	var csypf = 0;
-	var bxf = 0;
-	var zjje;
-	var sfxgcsyp;
-	var sfxgbx;
+    var zsf;
+	if(sfjzsf=="Y"){
+        zsf=0;
+    }else{
+	    zsf=1000;
+    }
+
+
+
 	$(document).ready(function() {
 		sfxgcsyp = $('input:radio[name="xgcsyp"]:checked').val();
+        sfxgcsyp="N";
 		sfxgbx = $('input:radio[name="xgbx"]:checked').val();
+        sfxgbx="N";
 		$("#bxgcsyp").click(function() {
 			sfxgcsyp = "N";
 			csypf = 0;
 			console.log(csypf);
 			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
+            if(zjje==0){
+                console.log("总计金额为0");
+                $("#xgtip").hide();
+                $("#xgtip0").hide();
+                $("#tjxg").hide();
+                $("#tjxgnext").show();
+            }else{
+                console.log("总计金额不为0");
+                $("#xgtip").show();
+                $("#xgtip0").show();
+                $("#tjxg").show();
+                $("#tjxgnext").hide();
+            }
 		});
 		$("#xgcsyp").click(function() {
 			sfxgcsyp = "Y";
-			csypf = 200;
+			csypf = 400;
 			console.log(csypf);
 			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
+            if(zjje==0){
+                console.log("总计金额为0");
+                $("#xgtip").hide();
+                $("#xgtip0").hide();
+                $("#tjxg").hide();
+                $("#tjxgnext").show();
+            }else{
+                console.log("总计金额不为0");
+                $("#xgtip").show();
+                $("#xgtip0").show();
+                $("#tjxg").show();
+                $("#tjxgnext").hide();
+            }
 		});
 		$("#bxgbx").click(function() {
 			sfxgbx = "N"
@@ -1157,15 +1458,56 @@ $(document).ready(function() {
 			console.log(bxf);
 			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
+            if(zjje==0){
+                console.log("总计金额为0");
+                $("#xgtip").hide();
+                $("#xgtip0").hide();
+                $("#tjxg").hide();
+                $("#tjxgnext").show();
+            }else{
+                console.log("总计金额不为0");
+                $("#xgtip").show();
+                $("#xgtip0").show();
+                $("#tjxg").show();
+                $("#tjxgnext").hide();
+            }
 		});
 		$("#xgbx").click(function() {
 			sfxgbx = "Y";
-			bxf = 500;
+			bxf = 120;
 			console.log(bxf);
 			zjje = zsf + csypf + bxf;
 			$(".querenxinxi span").text(zjje);
+            if(zjje==0){
+                console.log("总计金额为0");
+                $("#xgtip").hide();
+                $("#xgtip0").hide();
+                $("#tjxg").hide();
+                $("#tjxgnext").show();
+            }else{
+                console.log("总计金额不为0");
+                $("#xgtip").show();
+                $("#xgtip0").show();
+                $("#tjxg").show();
+                $("#tjxgnext").hide();
+            }
 		});
 	});
+
+    if(zjje==0){
+        console.log("总计金额为0");
+        $("#xgtip").hide();
+        $("#xgtip0").hide();
+        $("#tjxg").hide();
+        $("#tjxgnext").show();
+    }else{
+        console.log("总计金额不为0");
+        $("#xgtip").show();
+        $("#xgtip0").show();
+        $("#tjxg").show();
+        $("#tjxgnext").hide();
+    }
+
 	$("#tjxg").click(function() {
 		console.log(zsf + csypf + bxf);
 
