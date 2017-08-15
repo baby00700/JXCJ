@@ -15,13 +15,13 @@ input{
 	background-color: #FFF;
 }
 
-@-webkit-keyframes shuaxinrotate0/* Safari 和 Chrome */
+@-webkit-keyframes shuaxinrotate0/* Safari 鍜� Chrome */
 {
 from {-webkit-transform:rotate(0deg); }
 to {-webkit-transform:rotate(180deg); }
 }
 
-@-webkit-keyframes shuaxinrotate1/* Safari 和 Chrome */
+@-webkit-keyframes shuaxinrotate1/* Safari 鍜� Chrome */
 {
 from {-webkit-transform:rotate(180deg); }
 to {-webkit-transform:rotate(360deg); }
@@ -66,6 +66,26 @@ to {-webkit-transform:rotate(360deg); }
 	position: relative;
 }
 
+/*我已线下支付按钮样式*/
+.yanzheng-zhifu{
+	width:auto;
+	height:30px;
+	position:absolute;
+	right:70px;
+	/* background-color:#1296DB; */
+	border-radius:5px;
+	/* color:#fff; */
+	color:#1296DB;
+	top:10px;
+	text-align:center;
+	line-height:30px;
+	font-size:11pt;
+	padding:0 4px 0 4px;
+	font-weight:900;
+	-webkit-text-shadow:1px 1px 1px #1296DB;
+}
+
+
 .liucheng-tubiao {
 	width: 36px;
 	height: 36px;
@@ -88,6 +108,9 @@ to {-webkit-transform:rotate(360deg); }
 	font-size: 12pt;
 }
 
+
+
+
 .hengxiang {
 	width: 100%;
 	height: 100px;
@@ -97,12 +120,12 @@ to {-webkit-transform:rotate(360deg); }
 }
 
 .con {
-	width:150%;
+	width:200%;
 	height: 100px;
 }
 
 
-/*横向滚动 begin*/
+/*妯悜婊氬姩 begin*/
 
 li {
 	list-style: none;
@@ -208,7 +231,7 @@ li {
 	
 }
 
-/*单页面总*/
+/*鍗曢〉闈㈡��*/
 .spage{
 	width:100%;
 	position:relative;
@@ -323,7 +346,7 @@ li {
 	background-color:red;
 	z-index:999;
 }
-/*按钮active颜色   #0386ca; begin */
+/*鎸夐挳active棰滆壊   #0386ca; begin */
 .subbut{
 	height:46px;
 	background-color:#1296DB;
@@ -356,7 +379,7 @@ li {
 .sub-non{
 	display: none;
 }
-/*按钮active颜色   #0386ca; end */
+/*鎸夐挳active棰滆壊   #0386ca; end */
 .shoujihao{
 	
 	display: none;
@@ -375,7 +398,7 @@ li {
 
 
 }
-#inputout，#inputout2{
+#inputout锛�#inputout2{
 	color:#eee;
 	position:relative;
 	
@@ -404,7 +427,7 @@ li {
 	margin:0 auto;
 	
 }
-/*家庭信息*/
+/*瀹跺涵淇℃伅*/
 .biao-con{
 	color:#555;
 }
@@ -438,7 +461,7 @@ li {
 }
 
 
-/*服装信息*/
+/*鏈嶈淇℃伅*/
 .sgtz{
 	font-size:11pt;
 	color:#555;
@@ -447,7 +470,7 @@ li {
 	font-size:11pt;
 	text-align: right;
 }
-/*家庭住址*/
+/*瀹跺涵浣忓潃*/
 #jiatingzhuzhi{
 	height:100px;
 	width:100%;
@@ -716,7 +739,7 @@ li {
 
 .feiyong-con #feiyongshuju{
 	position:relative;
-	left:-28px;
+	left:-10px;
 }
 
 .jiating-con .xiala{
@@ -782,7 +805,7 @@ li {
 	font-size:10pt;
 }
 
-/*贷款申请*/
+/*璐锋鐢宠*/
 .daikuanshenqing{
 	width:100%;
 	height:200px;
@@ -834,7 +857,7 @@ li {
 	color:#ccc;
 }
 
-/*是否选购床上用品*/
+/*鏄惁閫夎喘搴婁笂鐢ㄥ搧*/
 .sfxuangouyp{
 	width:100%;
 	height:45px;
@@ -873,7 +896,7 @@ li {
 	background-size:100% 100%;
 }
 
-/*是否选购床上用品end*/
+/*鏄惁閫夎喘搴婁笂鐢ㄥ搧end*/
 .shenhe-zhuangtai{
 	
 	height:20px;
@@ -902,7 +925,7 @@ li {
 	top:-8px;
 }
 
-/*在线缴费页*/
+/*鍦ㄧ嚎缂磋垂椤�*/
 .zaixianjiaofei{
 	width:100%;
 	position:relative;
@@ -1018,7 +1041,7 @@ li {
 	top:-8px;
 }
 
-/*班级分配 page3*/
+/*鐝骇鍒嗛厤 page3*/
 .banjifenpei{
 	width:100%;
 	position:relative;
@@ -1157,7 +1180,7 @@ li {
 
 
 
-/*选购page*/
+/*閫夎喘page*/
 .xuangou{
 	width:100%;
 	position:relative;
@@ -1254,7 +1277,7 @@ li {
 	border-bottom:1px solid #EEEEEE;
 }
 
-/*军训服尺码*/
+/*鍐涜鏈嶅昂鐮�*/
 .shangyi-chima{
 	width:100%;
 	height:45px;
@@ -1519,7 +1542,7 @@ li {
 
 
 
-/*抵校信息page*/
+/*鎶垫牎淇℃伅page*/
 
 .dixiaoxinxi{
 	width:100%;
@@ -1619,7 +1642,7 @@ li {
 }
 
 
-/*宿舍分配*/
+/*瀹胯垗鍒嗛厤*/
 
 .sushefenpei{
 	width:100%;
@@ -1697,7 +1720,7 @@ li {
 }
 
 
-/*选宿舍加载中动画*/
+/*閫夊鑸嶅姞杞戒腑鍔ㄧ敾*/
 
 
 

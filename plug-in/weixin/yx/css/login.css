@@ -1,22 +1,20 @@
 @charset "utf-8";
-/* CSS Document */
-body{ background:url(../images/bodyBg.png) repeat-x; font-family:"微软雅黑";}
-input{ outline:none; font-family:"微软雅黑";-webkit-tap-highlight-color:rgba(255,0,0,0);}
-.header{ width:100%; height:102px; padding:15px 0px;}
-.img{ width:102px; height:102px; margin:0px auto;}
-.photo{ display:block; width:96px; height:96px; border-radius:96px; border:3px solid #fff; overflow:hidden;}
-.photo img{ width:100%;}
+*{ padding:0px; margin:0px;}
+body{ background:#fff; font-family:Helvetica; -webkit-tap-highlight-color:rgba(255,0,0,0);}
+input{ outline:none; font-family:Helvetica;}
 
-.login{ width:100%; height:100px; background:#fff; border-top:1px solid #e2e3e5;}
-.user{ width:100%; height:50px; background:#fff; border-bottom:1px solid #e2e3e5;}
-.userName{ height:50px; margin:0px 10px; padding-left:28px; background:url(../images/tb1.gif) no-repeat 0px center;}
-.userPwd{ height:50px; margin:0px 10px; padding-left:28px; background:url(../images/tb2.gif) no-repeat 0px center;}
-.inp{ width:100%; height:26px; padding:12px 0px;}
-.txt{ width:100%; height:26px; border:0px; background:#fff; line-height:26px; font-size:16px;}
-.box{ margin:15px;}
-.btn{ width:100%; height:50px; background:#00aced; border-radius:5px;}
-.sub{ width:100%; height:50px; border:0px; background:none; font-size:20px; color:#fff;}
-.link{ width:100%; height:30px; padding-top:10px;}
-.link span.one{ float:left;}
-.link span.two{ float:right;}
-.link a,.link a:hover{ color:#00aced; font-size:16px; text-decoration:none;}
+.main{ width:100%; height:auto; overflow:hidden;}
+.header{ height:auto; padding:30px 25px; text-align:left; background:-webkit-gradient(linear, 0% 0%, 100% 0%,from(#508dff), to(#39b9fe));}
+.header p{ height:28pt; background:url(../images/logo.png) no-repeat 0px center; background-size:28pt; font-size:18pt; line-height:28pt; color:#fff; padding-left:45px;}
+
+.login{ width:100%; height:auto; padding:30px 0px 10px 0px; overflow:hidden;}
+.user{ height:auto; padding:0px 25px; background:#fff; overflow:hidden;}
+.userName{ height:54px; padding-left:32px; background:url(../images/tb01.png) no-repeat 0px center; background-size:16pt; border-bottom:1px solid #ddd;}
+.userPwd{ height:54px; padding-left:32px; background:url(../images/tb02.png) no-repeat 0px center; background-size:16pt; border-bottom:1px solid #ddd;}
+.inp{ width:100%; height:24px; padding:15px 0px;}
+.txt{ width:100%; height:24px; border:0px; background:none; line-height:24px; font-size:14pt; color:#333;}
+.box{ margin:25px;}
+.btn{ background:#0093dd; border-radius:4px;}
+.btn:hover{ background:#017ebc;}
+.sub{ width:100%; height:45px; line-height:45px; border:0px; background:none; font-size:14pt; color:#fff;}
+.message{ padding:0px 10px; height:24px; line-height:24px; font-size:12pt; color:#f00; text-align:center;}
