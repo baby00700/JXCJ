@@ -35,6 +35,26 @@
 			var sfxgbx="${studentInfo.sfxgbx}";
 
 
+			//---------0727 zhai add---------
+			var optssmc="${studentInfo.ssmc}";
+			$(document).ready(function(){
+				if(optssmc!=""&&optssmc!=null&&optssmc!="null"&&optssmc!=undefined&&optssmc!="undefined"){
+					var ssharr = optssmc.split("-");
+					console.log(ssharr);
+					console.log(ssharr.length);
+					var ssh=ssharr[0]+"-";
+					for(var i=1;i<=ssharr.length-2;i++){
+						ssh+=ssharr[i]+"-";
+					}
+					ssh=ssh.substring(0,ssh.length-1);
+					console.log(ssh);
+					$("#optssmc").text(ssh);
+				}
+
+			});
+
+			//-------------end----------------
+
 		</script>
 	</head>
 
@@ -79,15 +99,13 @@
 					<li class="xinxi-list"><span class="xinxi-title">生源类别</span><span class="xinxi-con">${studentInfo.klmc}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">手机号码</span><span class="xinxi-con">${studentInfo.mobile}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">班级名称</span><span class="xinxi-con">${studentInfo.bjmc}</span></li>
-					<li class="xinxi-list"><span class="xinxi-title">宿舍名称</span><span class="xinxi-con">${studentInfo.ssmc}</span></li>
+					<!--0727 zhai changed -->
+					<li class="xinxi-list"><span class="xinxi-title">宿舍名称</span><span class="xinxi-con" id="optssmc">${studentInfo.ssmc}</span></li>
+
 					<li class="xinxi-list"><span class="xinxi-title">班主任</span><span class="xinxi-con">${studentInfo.fdyxm}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">班主任电话</span><span class="xinxi-con">${studentInfo.yddh}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">是否缴费</span><span class="xinxi-con" id="sfjf">${studentInfo.sfjf}</span></li>
 					<li class="xinxi-list"><span class="xinxi-title">是否选购床上用品</span><span class="xinxi-con" id="xgcsyp"></span></li>
-					<li class="xinxi-list"><span class="xinxi-title">是否选购保险</span><span class="xinxi-con" id="xgbx"></span></li>
-					
-					
-
 				</ul>
 				
 			</div>

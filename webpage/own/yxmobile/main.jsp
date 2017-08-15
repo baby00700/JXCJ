@@ -23,6 +23,42 @@
 	</style>
 
 	<script type="text/javascript">
+	var ksh = "${studentInfo.ksh}";
+	var imgpath1 = 'http://218.95.46.79/photo/photo/' + ksh + '.JPG';
+	var imgpath2 = 'http://218.95.46.79/photo/photo/' + ksh + '.jpg';
+	var imgpath3 = 'http://218.95.46.79/photo/photo/' + ksh + '.BMP';
+	var imgpath4 = 'http://218.95.46.79/photo/photo/' + ksh + '.bmp';
+	var imgpath5="";
+	
+	function notfound() {
+		var img = event.srcElement;
+		// alert("非JPG");
+		img.src = imgpath2;
+		$(".yicun").css('background-image','url('+imgpath2+')');
+
+		img.onerror = function() {
+			// alert("非jpg");
+			img.src = imgpath3;
+			$(".yicun").css('background-image','url('+imgpath3+')');
+			img.onerror = function() {
+				// alert("非BMP");
+				img.src = imgpath4;
+				$(".yicun").css('background-image','url('+imgpath4+')');
+				// 这里可以设置为默认的--null是终止onerror--
+				img.onerror = function() {
+					img.src = "plug-in/weixin/yx/images/head.png";
+					$(".yicun").css('background-image','url('+img.src+')');
+					img.onerror = null;
+				}
+			}
+		}
+		imgpath5=img.src;
+	}
+	
+	$(document).ready(function(){
+		$(".imagebox").attr("src", imgpath1);
+	});
+	
 		var stuaddr = "${studentInfo.address }";
 
 		var rows = 3; //每页显示记录数
@@ -115,23 +151,15 @@
 					<p></p>
 				</div>
 				<div class="conbut" id="querenbut-main" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
-				
 				<div class="conbut" id="main-quxiao" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
 				<div class="conbut" id="main-querenbut" style="display:none;">确定</div>
-
-				<div class="conbut" id="querenbut-main0" style="width:100%;text-align: center;line-height: 47px;display:none">确定</div>
-				
-				<div class="conbut" id="main-quxiao0" style="display:none;box-sizing: border-box;border-right:1px solid #ccc">取消</div>
-				
-				<div class="conbut" id="main-querenbut0" style="display:none;">确定</div>
-				
 			</div>
 		</div>
-
-		
 		<div class="stuinfo">
 			<div class="jibenxinxi">
-				<div class="touxiang"></div>
+				<div class="touxiang">
+					<img class="imagebox" onerror="notfound()" style="width:63px;height:77px;border-radius:7px;" />
+				</div>
 				<div class="loginout">注销</div>
 
 				<div class="wenzi">
@@ -321,18 +349,13 @@
 			$(".loginout").click(function() {
 				countAjax.abort();
 				$("#querenbut-main").hide();
-				$("#main-quxiao").hide();
-				$("#main-querenbut").hide();
-
 				$(".zhezhao-queren").stop().fadeIn();
-				$("#main-quxiao0").show();
-				$("#main-querenbut0").show();
-				$("#main-quxiao0").click(function() {
+				$("#main-quxiao").show();
+				$("#main-querenbut").show();
+				$("#main-quxiao").click(function() {
 					$(".zhezhao-queren").stop().fadeOut();
-
 				});
-				$("#main-querenbut0").unbind().click(function() {
-					
+				$("#main-querenbut").click(function() {
 					$.ajax({
 						type: "post",
 						url: "mobileStudentController.do?cancelUser",
@@ -417,7 +440,7 @@
 				$("#bddone").show().html("已完成报道！").next().hide().next().hide();
 			}
 
-			$("#zizhubaodao").unbind().click(function() {
+			$("#zizhubaodao").click(function() {
 				if(isbddone == "N") {
 					if(flowname == "" || flowname == "null") {
 
@@ -430,17 +453,13 @@
 								var su = data.success;
 								var obj = data.msg;
 								if(su == true) {
-										$("#querenbut-main").hide();
-										$("#main-quxiao0").hide();
-										$("#main-querenbut0").hide();
-										
 										$(".zhezhao-queren").stop().fadeIn();
 										$("#main-quxiao").show();
 										$("#main-querenbut").show();
 										$("#main-quxiao").click(function() {
 										$(".zhezhao-queren").stop().fadeOut();
 										});
-										$("#main-querenbut").unbind().click(function() {
+										$("#main-querenbut").click(function() {
 										window.location.href = "mobileStudentController.do?index";
 										});
 

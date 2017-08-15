@@ -126,34 +126,28 @@
 	</div>
 	<!--加载动画-->
 
-	<div class="wrap">
-		<div class="header">
-			<div class="img">
-				<div class="photo">
-					<img src="plug-in/weixin/yx/images/head.png" />
-				</div>
-			</div>
-		</div>
-		<div class="login">
-			<div class="user">
-				<div class="userName">
-					<div class="inp">
+	<div class="main">
+  <div class="header">
+        <p>用户登录</p>
+    </div>
+		   <div class="login">
+        <div class="user">
+            <div class="userName"> <div class="inp">
 						<input type="tel" id="ksh" name="ksh" placeholder="请输入考生号"
 							class="txt" />
 					</div>
-				</div>
-			</div>
-			<div class="user">
-				<div class="userPwd">
-					<div class="inp">
+			  </div>
+        </div>
+        <div class="user">
+            <div class="userPwd">
+                <div class="inp">
 						<input type="password" id="sfzh" name="sfzh" placeholder="请输入身份证号后六位"
 							class="txt" />
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="box">
-			<div class="btn">
+					  </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="btn">
 				<input type="submit" id="button" name="button"  value="登录" class="sub" />
 				<input type="submit" id="button2" name="button"  value="登录中..." class="sub" style="display: none" />
 			</div>
