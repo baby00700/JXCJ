@@ -381,24 +381,27 @@ li {
 }
 /*鎸夐挳active棰滆壊   #0386ca; end */
 .shoujihao{
-	
-	display: none;
 	margin-left:10px;
 	font-size:11pt;
 	line-height: 45px;
+	border: none;
+	outline: medium;
+	text-align: right;
 	
 }
 
 .youxiang{
 
-	display: none;
 	margin-left:10px;
 	font-size:11pt;
 	line-height: 45px;
+	border: none;
+	outline: medium;
+	text-align: right;
 
 
 }
-#inputout锛�#inputout2{
+#inputout,#inputout2{
 	color:#eee;
 	position:relative;
 	

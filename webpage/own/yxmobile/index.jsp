@@ -25,7 +25,7 @@
 
 <script type="text/javascript"
 	src="plug-in/weixin/yx/js/jquery.qrcode.js"></script>
-	
+
 	<script type="text/javascript"
 	src="plug-in/weixin/yx/js/base.js"></script>
 
@@ -103,12 +103,12 @@
 	var xstz1 = "${studentInfo.xstz}";
 	var fzcc1 = "${studentInfo.fzcc}";
 	var xzcc1 = "${studentInfo.xzcc}";
-	var email = "${studentInfo.email}";
+	var stemail = "${studentInfo.email}";
 	var sfjzsf = "${studentInfo.sfjzsf}";
 	//var sfjzsf = "Y";
 	var isbddone = "${studentInfo.sfyx}";//是否院系报到
 	var stuaddr = "${studentInfo.address }"; //院系报到地址
-	var zsffor = "${studentInfo.money }"; //实际住宿费 
+	var zsffor = "${studentInfo.money }"; //实际住宿费
 	var csypf = 0;
 	var bxf = 0;
 	var zjje = 0;
@@ -119,7 +119,7 @@
 	var imgpath3 = 'http://218.95.46.79/photo/photo/' + ksh + '.BMP';
 	var imgpath4 = 'http://218.95.46.79/photo/photo/' + ksh + '.bmp';
 	var imgpath5 = "";
-	
+
 	$(document).ready(function() {
 		$(".imagebox").attr("src", imgpath1);
 		$(".yicun").css('background-image', 'url(' + imgpath1 + ')');
@@ -371,16 +371,24 @@
 						</div>
 						<div class="biao-con">
 							<ul>
-								<li class="xinxi-list"><span class="xinxi-title">手机号码<span
-										style="color: red">*</span></span><span class="xinxi-con"
-									id="inputout"><p style="margin-bottom: 0; color: #555"></p>
-										<input type="text" class="shoujihao"
-										style="margin-bottom: 0px" autofocus="autofocus" id="stMobile" /></span></li>
-								<li class="xinxi-list"><span class="xinxi-title">QQ邮箱<span
-										style="color: red">*</span></span><span class="xinxi-con"
-									id="inputout2"><p style="margin-bottom: 0; color: #555">请输入邮箱</p>
-										<input type="text" class="youxiang"
-										style="margin-bottom: 0px;" autofocus="autofocus" id="stMail" /></span></li>
+								<li class="xinxi-list">
+									<span class="xinxi-title">手机号码
+										<span style="color: red">*</span>
+									</span>
+									<span class="xinxi-con">
+										<input type="text" class="shoujihao" style="margin-bottom: 0px" autofocus="autofocus" id="stMobile"  placeholder="请输入手机号" maxlength="11"     />
+									</span>
+								</li>
+								
+                                <li class="xinxi-list">
+                                    <span class="xinxi-title">QQ邮箱
+                                         <span style="color: red">*</span>
+                                    </span>
+                                    <span class="xinxi-con">
+                                         <input type="text" class="youxiang" style="margin-bottom: 0px" autofocus="autofocus" id="stMail"  placeholder="请输入邮箱" />
+                                    </span>
+                                </li>
+								<%--<li class="xinxi-list"><span class="xinxi-title">QQ邮箱<span 	style="color: red">*</span></span><span class="xinxi-con"	id="inputout2"><p style="margin-bottom: 0; color: #555">请输入邮箱</p>	<input type="text" class="youxiang"	style="margin-bottom: 0px;" autofocus="autofocus" id="stMail" /></span></li>--%>
 								<li class="xinxi-list"><span class="xinxi-title">生源类别</span><span
 									class="xinxi-con">${studentInfo.klmc}</span></li>
 								<li class="xinxi-list"><span class="xinxi-title">籍贯</span><span
@@ -470,9 +478,7 @@
 															value="${studentInfo.jtmc2}">
 													</div>
 													<div class="mui-input-row">
-														<label>家长电话</label> <input type="text"
-															placeholder="请输入手机号码" id="jzdh2" class="inputjzdh"
-															maxlength="11" value="${studentInfo.jtdh2}">
+														<label>家长电话</label> <input type="text"	placeholder="请输入手机号码" id="jzdh2" class="inputjzdh"	maxlength="11" value="${studentInfo.jtdh2}">
 													</div>
 													<%--<div class="mui-input-row">--%>
 													<%--<label>家长身份证号</label>--%>
@@ -510,11 +516,7 @@
 															maxlength="11" value="${studentInfo.jtdh3}">
 													</div>
 
-													<%--<div class="mui-input-row">--%>
-													<%--<label>监护人身份证号</label>--%>
-													<%--<input type="text" placeholder="请输入身份证号" id="jzsfzh3" class="inputjzsfzh" maxlength="18" value="${studentInfo.sfzh3}">--%>
-													<%--</div>--%>
-													<%----%>
+
 
 													<div class="mui-input-row">
 														<label>亲属关系</label> <input type="text"
@@ -838,10 +840,10 @@
 					</div>
 					<div class="iszsf-dispaly arrnull" id="qtfylist">
 						<!-- <li class="xinxi-list"><span class="xinxi-title">住宿费</span><span	class="xinxi-con">￥<span id="zsf"></span>元</span></li>
-						
+
 						<li class="xinxi-list"><span class="xinxi-title">书本费</span><span class="xinxi-con">￥<span id="sbf"></span>元</span></li>
 						<li class="xinxi-list"><span class="xinxi-title">杂费</span><span class="xinxi-con">￥<span id="tjf"></span>元</span></li> -->
-					
+
 					</div>
 
 				</div>
@@ -909,9 +911,9 @@
 					<div class="querenxinxi" id="xgtip">请认真核对个人信息，确保无误后点击提交支付</div>
 				</div>
 				<!--支付其他费用 end-->
-				
+
 				<div class="subbut" id="tjxgnext" style="margin-top: 20px; display: none;">提交支付</div>
-					
+
 				<div class="subbut" id="tjxg1"	style="margin-top: 20px; display: none">下一步</div>
 
 
@@ -1372,7 +1374,7 @@
 					 */
 					result.innerText = rs.text;
 					dixiaoTime = rs.text;
-					/* 
+					/*
 					 * 返回 false 可以阻止选择框的关闭
 					 * return false;
 					 */
@@ -1389,6 +1391,16 @@
 	})(mui);
 
 	$(document).ready(function() {
+
+					//if input == null
+					var inputvallen=$("#page1 input").length;
+					
+					for(var i=0;i<inputvallen;i++){
+						var inputval=$("#page1 input").eq(i).val();
+						if(inputval==null||inputval=="null"){
+							$("#page1 input").eq(i).val("");
+						}
+					}
 						//var sfjf="N";
 
 						//判断是否缴费若缴费则隐藏

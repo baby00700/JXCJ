@@ -1,10 +1,6 @@
 //onload
 
-
-
-
 $(document).ready(function () {
-    console.log(zsffor);
 
     var xufy = 0; //------其他费用
     var xufymc;
@@ -26,11 +22,12 @@ $(document).ready(function () {
     var cc0 = []; //全局形载指代cc[]
     var arr = [];
 
+    $("#page2").append('<div class="subbut-visited" id="xuefeihuoqubut">正在获取缴费信息...</div>');//默认加载
+    $("#xuefeizhifubut").hide();//支付按钮在没有获取到数据时是不可用的
 
     $.ajax({
         type: "post",
         dataType: "json",
-        timeout:1000,
         url: "mobileStudentController.do?getQFxx",
         success: function (data) {
             console.log(data.msg);
@@ -38,23 +35,31 @@ $(document).ready(function () {
             arr = obj;
             console.log(arr+"/////////////////////////////////");
             if (arr == null || arr == "" || arr.length == 0||arr==undefined||arr=="undefined") {
+                $("#xuefeihuoqubut").hide();
+                $("#xuefeizhifubut").show();
                 //---选购页面其他费用---获取不到设定的应交款时隐藏---显示
                 if (sfjzsf != "Y") {
+
                     $(".arrnull").hide();
-                    $(".zhusufei").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">无法获取数据，请联系管理员解决！</li>')
+                    $(".zhusufei").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">请确认网络畅通后刷新页面，或联系管理员解决!</li>')
                     $("#tjxgnext").removeClass("subbut").unbind().addClass("subbut-visited");
+
                 }
 
                 //----缴学费页面
                 if (sfjf != "Y") {
+
+
                     $(".feiyongxinxi ul li").hide();
-                    $(".feiyongxinxi ul").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">无法获取数据，请联系管理员解决！</li>');
+                    $(".feiyongxinxi ul").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">请确认网络畅通后刷新页面，或联系管理员解决！</li>');
                     $("#xuefeizhifubut").removeClass("subbut").unbind().addClass("subbut-visited");
                     $("#xuefeitip").hide();
                 }
 
 
             } else {
+                $("#xuefeihuoqubut").hide();
+                $("#xuefeizhifubut").show();
                 arract(arr);
             }
 
@@ -63,18 +68,21 @@ $(document).ready(function () {
         },
         error:function(data){
            // alert("cuowu");
+            $("#xuefeihuoqubut").hide();
+            $("#xuefeizhifubut").show();
+
             //---选购页面其他费用---获取不到设定的应交款时隐藏---显示
             if (sfjzsf != "Y") {
                 $(".arrnull").hide();
-                $(".zhusufei").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">无法获取数据，请联系管理员解决！</li>')
+                $(".zhusufei").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">请确认网络畅通后刷新页面，或联系管理员解决!</li>')
                 $("#tjxgnext").removeClass("subbut").unbind().addClass("subbut-visited");
             }
 
             //----缴学费页面
             if (sfjf != "Y") {
                 $(".feiyongxinxi ul li").hide();
-                $(".feiyongxinxi ul").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">无法获取数据，请联系管理员解决！</li>');
-                $("#xuefeizhifubut").removeClass("subbut").unbind().addClass("subbut-visited");
+                $(".feiyongxinxi ul").append('<li class="feiyong-xq" style="text-align: center;font-size:10pt;line-height:40px;color:red">请确认网络畅通后刷新页面，或联系管理员解决!</li>');
+                $("#xuefeizhifubut").removeClass("subbut").unbind().addClass("subbut-visited").text("无法获取缴费信息！");
                 $("#xuefeitip").hide();
             }
         }
@@ -83,7 +91,6 @@ $(document).ready(function () {
 
     //------解析数组 为六个一组 begin-----
     var xfcode;
-
     function arract(arr) {
         var n = 6;  //控制每N个元素一组，n的整数倍数应该是输入数组的长度
         var b = []; //中间件
@@ -106,7 +113,7 @@ $(document).ready(function () {
 
             }
         }
-        console.log(cc0[1][0].indexOf("B"));
+
         for (var i = 0; i < cc0.length; i++) {
             console.log(cc[i][0]);
             if (cc0[i][0].indexOf("B") >= 0) {
@@ -140,7 +147,7 @@ $(document).ready(function () {
 
             }
         }
-        //-----------住宿费---------
+        //-----------qt费---------
         for (var i = 0; i < cc0.length; i++) {
             fytjinfo += cc0[i][0] + "$" + cc0[i][1] + "$" + cc0[i][3] + ",";//拼接字符串$01$..$...
             var qyfylist = '<li class="xinxi-list"><span class="xinxi-title">' + cc0[i][1] + '</span><span class="xinxi-con">￥<span>' + cc0[i][3] + '</span>元</span></li>';
@@ -184,6 +191,11 @@ $(document).ready(function () {
     console.log(xgfycount + "****---****");
 
 
+
+
+
+
+
     //-------床上用品end-------------
 
 
@@ -195,7 +207,7 @@ $(document).ready(function () {
     var buttn = benciliucheng - 1;
     var isn1;
 
-    console.log(subxf);
+
 
 
     // 获取流程
@@ -206,34 +218,33 @@ $(document).ready(function () {
         success: function (data) {
             var obj = $.parseJSON(data.msg);
             for (var i = 0; i < obj.length; i++) {
-                console.log("ok");
                 console.log("流程ID：" + obj[i].id + "流程名称：" + obj[i].process_name);
                 var liuchengName = obj[i].process_name;
-                // var liuchengXH=obj[i].process_step;
-                // console.log(liuchengXH);
                 var liuchengTOU = '<li><span class="step">' + (i + 1) + '</span><span class="title">' + liuchengName + '</span></li>';
                 $(".wizard-steps").append(liuchengTOU);
                 if (grlc != "" && grlc != null && grlc != undefined && grlc != "null") {
                     if (obj[i].id == grlc) {
                         console.log("个人流程" + grlc);
-                        console.log("I=" + i);
                         liucheng = i + 1;
                         console.log("流程" + liucheng);
+                        if(liucheng!=1&&liucheng!=3){
+                            $(".yanzheng-zhifu").hide();
+                            console.log(liucheng);
+                        }
                         var screenWidth = window.screen.width;
                         var scrollwidth = screenWidth / 3;
                         $('#ctrlpoint').animate({
                             scrollLeft: scrollwidth * liucheng - scrollwidth
                         });
-                        var oron = obj[i].endbs;
-                        console.log(oron);
-                        if (oron == "on") {
-                            $("#page6").show().siblings().hide();
-
-                        }
+                      
                     }
                 } else {
                     liucheng = 0;
                     console.log(liucheng + "//////");
+                    if(liucheng!=1&&liucheng!=3){
+                        $(".yanzheng-zhifu").hide();
+                        console.log(liucheng);
+                    }
                 }
 
             }
@@ -254,7 +265,7 @@ $(document).ready(function () {
             buttonclick(buttn); // 默认执行初始按钮状态；
             $(".spage").eq(liucheng).show().siblings().hide();
 
-            // 定义顶部高亮封装为函数
+            // 定义顶部高亮封装为函数 以及‘我已缴费’按钮的显示隐藏
             function gaoliangtop(n) {
                 $('.wizard-steps li').eq(n).children().first().css("border-color", "#1296DB").css("background", "#1296DB").css("color", "#fff").parent().siblings().children(".step").css("background-color", "#CED1D6").css("border-color", "#CED1D6").css("color", "black");
                 $(".wizard-steps  li").eq(n).children().last().css("color", "#1296DB").parent().siblings().children(".title").css("color", "#333");
@@ -265,13 +276,19 @@ $(document).ready(function () {
                 $('#ctrlpoint').animate({
                     scrollLeft: scrollwidth * n - scrollwidth
                 });
-
-
+                console.log(n);
+                //‘我已缴费’按钮显示隐藏
+                if(n!=1&&n!=3){
+                    $(".yanzheng-zhifu").hide();
+                }else{
+                     $(".yanzheng-zhifu").show();
+                }
 
             }
+
+
             // 顶部左右滚动点击高亮代码 开始 默认状态
-            // morenliucheng=liucheng
-            var morenliucheng = liucheng; //
+            var morenliucheng = liucheng;
             // console.log(n);
             $('.wizard-steps li').eq(morenliucheng).children().first().css("border-color", "#1296DB").css("background", "#1296DB").css("color", "#fff").parent().siblings().children(".step").css("background-color", "#CED1D6").css("border-color", "#CED1D6").css("color", "black");
             $(".wizard-steps li").eq(morenliucheng).children().last().css("color", "#1296DB").parent().siblings().children(".title").css("color", "#333");
@@ -293,29 +310,11 @@ $(document).ready(function () {
             // 点击底部按钮 提交数据 跳转下一页 并禁用事件
             // page1
             $("#gerenxinxibut").unbind("click").on("click", function () {
-
                 // 判断必填项是否为空
                 // 定义变量
-                var stmobile1 = $("#inputout p").html();
-                console.log(stmobile1);
-                if (stmobile1 == "null" || stmobile1 == "" || stmobile1 == undefined || stmobile1 == null) {
-                    var mobile = $("#stMobile").val(); // 手机号
-                    $("#inputout p").html("请输入手机号");
-                } else {
-                    var mobile = sjh; // 手机号
-                }
-
-                var stmail = $("#inputout2 input").val();
-                console.log(stmail);
-                if (stmail == "null" || stmail == "" || stmail == undefined || stmail == null) {
-                    var youxiang = $("#stmail").val();
-
-                    $("#stmail").attr('placeholder', ' 请重新输入');
-                } else {
-                    var youxiang = stmail;
-                }
-
-                console.log(mobile);
+                var mobile=$("#stMobile").val();
+                var email=$("#stMail").val();
+                console.log(mobile+email)
                 var syd = $("#stShengyuan").val(); // 生源地
                 var jtdz = $("#jiatingzhuzhi").val(); // 家庭住址
                 var jtmc1 = $("#jzxm1").val(); // 家长姓名123
@@ -341,7 +340,7 @@ $(document).ready(function () {
                 }];
 
                 var jtinfo = [{
-                    "email": stmail,
+                    "email": email,
                     "jtmc1": jtmc1,
                     "jtmc2": jtmc2,
                     "jtmc3": jtmc3,
@@ -388,7 +387,7 @@ $(document).ready(function () {
                 }
                 console.log(mobile);
 
-                if (stmail == "" || mobile == "" || syd == "" || jtdz == "" || xssg == "" || xstz == "" || fzcc == "none" || xzcc == "none") {
+                if (email == "" || mobile == "" || syd == "" || jtdz == "" || xssg == "" || xstz == "" || fzcc == "none" || xzcc == "none") {
                     alert('带"*"的为必填项');
                 } else {
                     if (otjt1 == true || otjt2 == true || otjt2 == true) {
@@ -402,6 +401,25 @@ $(document).ready(function () {
                         });
                         $(".queren-wenzi p").text("是否确认提交？提交后不可更改！").css("margin-top", "10px").css("padding-left", "10px");
                         $("#PAGE1main-querenbut").unbind().click(function () {
+
+                            //修改及时更改后续手机号
+                            var shoujihaoLEN=$(".xinxi-list").length;
+                            var shoujihaoTEXT;
+
+                            console.log(shoujihaoLEN);
+                            for(var i=0;i<shoujihaoLEN;i++){
+                                shoujihaoTEXT=$(".xinxi-list").eq(i).children(".xinxi-title").text();
+                                console.log(shoujihaoTEXT+"--------");
+                                if(shoujihaoTEXT=="手机号码"){
+                                    console.log(i+"********************************************");
+                                    $(".xinxi-list").eq(i).children(".xinxi-title").next(".xinxi-con").text(mobile);
+
+                                }
+                            }
+
+
+
+
                             $(".jiazai").stop().fadeIn(1000);
                             // 报名，保存信息
                             // 报名方法AJAx
@@ -432,7 +450,7 @@ $(document).ready(function () {
                                         n = 1;
                                         isn1 = n;
                                         gaoliangtop(n);
-
+                                       
                                         benciliucheng++;
                                         buttonclick(buttn);
                                         $("#gerenxinxibut").removeClass("subbut").unbind().addClass("subbut-visited");
@@ -539,6 +557,64 @@ $(document).ready(function () {
                                         console.log(ssh);
                                         $("#ssh").text(ssh);
                                         $("#ssh0").text(ssh);
+
+							
+
+										var sshmoney=sshparse[0].money;
+										if(zsffor!="0"&&zsffor!=""&&zsffor!=null&&zsffor!="null"){
+											zsffor = zsffor * 1;
+											subzsf = zsffor;
+											for (var i = 0; i < cc0.length; i++) {
+												if (cc0[i][0] == "03") {
+													cc0[i][3] = zsffor;
+													console.log(cc0 + "//***--");
+													
+												}
+
+											}
+											
+										}else{
+											sshmoney=sshmoney*1;
+											subzsf = sshmoney;
+											for (var i = 0; i < cc0.length; i++) {
+												if (cc0[i][0] == "03") {
+													cc0[i][3] = sshmoney;
+													console.log(cc0 + "//***--");
+													
+												}
+
+											}
+										
+										
+										}
+
+
+										$("#qtfylist").children().remove();
+										xgfycount=0;
+										fytjinfo="";
+										for (var i = 0; i < cc0.length; i++) {
+											fytjinfo += cc0[i][0] + "$" + cc0[i][1] + "$" + cc0[i][3] + ",";//拼接字符串$01$..$...
+											var qyfylist = '<li class="xinxi-list"><span class="xinxi-title">' + cc0[i][1] + '</span><span class="xinxi-con">￥<span>' + cc0[i][3] + '</span>元</span></li>';
+											$("#qtfylist").append(qyfylist);
+											xgfycount += cc0[i][3];
+										}
+
+										fytjinfo = fytjinfo.substring(0, fytjinfo.length - 1);
+
+										console.log(fytjinfo);
+										console.log(xgfycount + "****---****");
+										$(".querenxinxi span").text(xgfycount);
+
+										
+
+
+
+
+										
+
+
+
+
 
                                         // 关闭遮罩层
                                         $(".zhezhao-queren").stop().fadeOut();
@@ -729,10 +805,55 @@ $(document).ready(function () {
                             // ---0725
                             // zhai
                             // add
+							
                             var sshOrign = sshparse[0].ssh;
                             var ssharr = sshOrign.split("-");
                             console.log(ssharr);
                             console.log(ssharr.length);
+							console.log(cc0+"cc0222");
+							var sshmoney=sshparse[0].money;
+							if(zsffor!="0"&&zsffor!=""&&zsffor!=null&&zsffor!="null"){
+								zsffor = zsffor * 1;
+								subzsf = zsffor;
+								for (var i = 0; i < cc0.length; i++) {
+									if (cc0[i][0] == "03") {
+										cc0[i][3] = zsffor;
+										console.log(cc0 + "//***--");
+										
+									}
+
+								}
+								
+							}else{
+								sshmoney=sshmoney*1;
+								subzsf = sshmoney;
+								for (var i = 0; i < cc0.length; i++) {
+									if (cc0[i][0] == "03") {
+										cc0[i][3] = sshmoney;
+										console.log(cc0 + "//***--");
+										
+									}
+
+								}
+							
+							
+							}
+
+
+							$("#qtfylist").children().remove();
+							xgfycount=0;
+							fytjinfo="";
+							for (var i = 0; i < cc0.length; i++) {
+								fytjinfo += cc0[i][0] + "$" + cc0[i][1] + "$" + cc0[i][3] + ",";//拼接字符串$01$..$...
+								var qyfylist = '<li class="xinxi-list"><span class="xinxi-title">' + cc0[i][1] + '</span><span class="xinxi-con">￥<span>' + cc0[i][3] + '</span>元</span></li>';
+								$("#qtfylist").append(qyfylist);
+								xgfycount += cc0[i][3];
+							}
+
+							fytjinfo = fytjinfo.substring(0, fytjinfo.length - 1);
+							console.log(fytjinfo);
+							console.log(xgfycount + "****---****");
+							$(".querenxinxi span").text(xgfycount);
                             var ssh = ssharr[0] + "-";
                             for (var i = 1; i <= ssharr.length - 2; i++) {
                                 ssh += ssharr[i] + "-";
@@ -891,7 +1012,6 @@ $(document).ready(function () {
             $("#chezhan").change(function () {
                 chezhan = $("#chezhan").find("option:selected").text();
             });
-
             var wenti1 = $("#wenti1").text();
             var wenti2 = $("#wenti2").text();
             var wenti3 = $("#wenti3").text();
@@ -1073,34 +1193,117 @@ $(document).ready(function () {
         $("#yuanxi").text("是");
     }
 
-    // 基本信息填手机号隐藏显示
-    var shoujihao;
-    $("#inputout").click(function () {
-        $("#inputout p").hide().parent().children().last().show().css("border", "0").css("text-align", "right").css("color", "#555");
+    //-----验证手机号格式begin----·
+    $("#stMobile").bind('input propertychange',function () {
+            var curLength = $("#stMobile").val().length;
+            if (curLength > 11) {
+                var num = $("#stMobile").val().substr(0, 11);
+                $("#stMobile").val(num);
+                console.log(num);
+                var firststr = num.substr(0, 1); // 获取手机号的第一位，判断是否是1
+                if (isNaN(num) == true  || firststr != 1) {
+                    $(this).val("").attr('placeholder', '手机号格式不正确').addClass("invalid");
+
+                }
+
+            }
+
     });
-    if (stmobile != "null" && stmobile != "") {
-        shoujihao = stmobile;
-        $("#inputout p").html(shoujihao);
+    $("#stMobile").blur(function(){
+        var num = $("#stMobile").val();
+        var firststr = num.substr(0, 1); // 获取手机号的第一位，判断是否是1
+        if (isNaN(num) == true  || firststr != 1||num.length!=11) {
+            $(this).val("").attr('placeholder', '手机号格式不正确').addClass("invalid");
+
+        }
+    });
+    //---手机号加载到页面--
+    if (stmobile != "null" || stmobile != "" || stmobile != undefined || stmobile != null) {
+        $("#stMobile").val(stmobile);
+    }
+    //---end--
+
+
+
+
+
+    //----验证邮箱格式
+
+
+
+    $("#stMail").blur(function(){
+        var email0=$("#stMail").val();
+       // var emailPat=/^(.+)@(.+)$/;
+        var emailPat= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+        var matchArray=email0.match(emailPat);
+        if(matchArray==null){
+            $(this).val("").attr('placeholder', '邮箱格式不正确').addClass("invalid");
+        }
+    });
+
+    if (stemail != "null" || stemail != "" || stemail != undefined || stemail != null) {
+        $("#stMail").val(stemail);
     }
 
-    $("#inputout input").blur(function () {
-        shoujihao = $("#inputout input").val();
+    /* // 基本信息填手机号隐藏显示
+     var shoujihao;
+     $("#inputout").click(function () {
+         $("#inputout p").hide().parent().children().last().show().css("border", "0").css("text-align", "right").css("color", "#555");
+     });
+     if (stmobile != "null" && stmobile != "") {
+         shoujihao = stmobile;
+         $("#inputout p").html(shoujihao);
+     }
 
-        console.log(shoujihao);
-        if (shoujihao != "") {
+     $("#inputout input").blur(function () {
+         shoujihao = $("#inputout input").val();
+
+         console.log(shoujihao);
+         if (shoujihao != "") {
+             // alert("ok");
+             $("#inputout p").html(shoujihao);
+         } else {
+             // alert("no");
+             shoujihao = sjh;
+             $("#inputout p").html(shoujihao);
+         }
+
+         $("#inputout input").hide().prev().show().css("color", "#555");
+
+     });*/
+
+/*
+    // 基本信息填手机号隐藏显示
+    var youxiang;
+    $("#inputout2").click(function () {
+        $("#inputout2 p").hide().parent().children().last().show().css("border", "0").css("text-align", "right").css("color", "#555");
+    });
+    if (email != "null" && email != "") {
+        youxiang = email;
+        $("#inputout2 p").html(youxiang);
+    }
+
+    $("#inputout2 input").blur(function () {
+        youxiang = $("#inputout2 input").val();
+
+        console.log(youxiang);
+        if (youxiang != "") {
             // alert("ok");
-            $("#inputout p").html(shoujihao);
+            $("#inputout2 p").html(youxiang);
         } else {
             // alert("no");
-            shoujihao = sjh;
-            $("#inputout p").html(shoujihao);
+            youxiang = email;
+            $("#inputout2 p").html(youxiang);
         }
 
-        $("#inputout input").hide().prev().show().css("color", "#555");
+        $("#inputout2 input").hide().prev().show().css("color", "#555");
 
-    });
+    });*/
 
-   
+
+
+
+
     // end
     // 生源地
     $("#inputout1").click(function () {
@@ -1121,10 +1324,6 @@ $(document).ready(function () {
         $("#inputout1 input").hide().prev().show().css("color", "#555");
 
     });
-
-
-
-
 
     // 贷款选项卡高亮
     $(".daikuan-left").click(function () {
@@ -1152,8 +1351,7 @@ $(document).ready(function () {
     });
 
     // 控制贷款申请文字在200字以内
-    $("#shenqing-shuoming").bind('input propertychange',
-        function () {
+    $("#shenqing-shuoming").bind('input propertychange', function () {
             var curLength = $("#shenqing-shuoming").val().length;
 
             if (curLength > 200) {
@@ -1206,11 +1404,11 @@ $(document).ready(function () {
         console.log(chuangshangmoney);
         zongjine = junxunmoney + chuangshangmoney;
     });
-    //---控制‘我已线下缴费按钮’显示隐藏
-    if (liucheng != 1 && liucheng != 3) {
-        console.log(liucheng + "***///***");
+    /*//---控制‘我已线下缴费按钮’显示隐藏
+    if (liucheng== 1 && liucheng== 3) {
+        console.log(liucheng + "***!///!***");
         $(".yanzheng-zhifu").hide();
-    }
+    }*/
 
     //---验证是否缴费，若已缴费则刷新页面，若无则提示
     $("#jfconfirm").unbind().click(function () {
